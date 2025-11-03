@@ -57,6 +57,16 @@ public class PlayerMove : MonoBehaviour
         // 벡터: 크기와 방향을 표현하는 물리 개념
         Vector2 direction = new Vector2(h, v);
 
+        // 2-1. 방향을 크기 1로 만드는 정규화를 한다.
+        direction.Normalize();
+        // Debug.Log($"direction: {direction.x}, {direction.y}");
+
+        // 오른쪽              (1,0)
+        // 위쪽                (0,1)
+        // 오른쪽 대각선 위    (1,1)
+        // 대각선으로 이동할 때 이동속도가 빨라지는 문제
+        // 방향을 1로 만들기: 정규화!
+
         // 3. 그 방향으로 이동을 한다.
         Vector2 position = transform.position; // 현재 위치
         // 새로운 위치 = 현재 위치 + (방향 * 속력) * 시간
