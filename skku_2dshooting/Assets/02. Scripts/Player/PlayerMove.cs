@@ -2,17 +2,14 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    // ¸ñÇ¥
-    // Å°º¸µå¸¦ ÀÔ·ÂÇÒ ¶§ ÀÔ·Â¿¡ µû¶ó ¹æÇâÀ» ±¸ÇÏ°í ±× ¹æÇâÀ¸·Î ÀÌµ¿½ÃÅ°°í ½Í´Ù.
-
-    [Header("´É·ÂÄ¡")]
+    [Header("ëŠ¥ë ¥ì¹˜")]
     public float Speed = 2f;
     public float MaxSpeed = 10f;
     public float MinSpeed = 0.1f;
     public float SpeedIncrement = 0.05f;
     public float SpeedDashAmount = 1.5f;
 
-    [Header("ÀÌµ¿¹üÀ§")]
+    [Header("ì´ë™ë²”ìœ„")]
     public float MaxX = 2;
     public float MinX = -2;
     public float MaxY = 5;
