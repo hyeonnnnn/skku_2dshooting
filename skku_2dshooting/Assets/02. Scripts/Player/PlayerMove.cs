@@ -24,6 +24,12 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
+        HandleSpeedAdjustment();
+        HandleMovement();
+    }
+
+    private void HandleSpeedAdjustment()
+    {
         if (Input.GetKey(KeyCode.Q))
         {
             Speed += SpeedIncrement;
@@ -34,7 +40,10 @@ public class PlayerMove : MonoBehaviour
         }
 
         Speed = Mathf.Clamp(Speed, MinSpeed, MaxSpeed);
-
+    }
+    
+    private void HandleMovement()
+    {
         float speed = Speed;
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
@@ -54,7 +63,7 @@ public class PlayerMove : MonoBehaviour
 
         direction.Normalize();
 
-        Vector2 position = transform.position; 
+        Vector2 position = transform.position;
 
         Vector2 newPosition = position + (direction * speed) * Time.deltaTime;
 
@@ -75,7 +84,7 @@ public class PlayerMove : MonoBehaviour
             newPosition.y = MinY;
         }
 
-        transform.position = newPosition; 
+        transform.position = newPosition;
     }
 
     private void TranslateToOrigin(float speed)
