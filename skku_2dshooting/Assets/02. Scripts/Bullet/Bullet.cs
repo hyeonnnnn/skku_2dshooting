@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float Speed;
-    public float StartSpeed = 0.01f;
-    public float EndSpeed = 0.03f;
-    public float Duration = 0.2f;
+    [Header("이동 속도")]
+    private float _currentSpeed;
+    private float _startSpeed = 0.01f;
+    private float _endSpeed = 0.03f;
+    private float _duration = 0.2f;
     private float _accelation;
 
     [Header("총알 움직임")]
@@ -17,8 +18,8 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        Speed = StartSpeed;
-        _accelation = (EndSpeed - StartSpeed) / Duration;
+        _currentSpeed = _startSpeed;
+        _accelation = (_endSpeed - _startSpeed) / _duration;
     }
 
     private void Update()
@@ -29,9 +30,9 @@ public class Bullet : MonoBehaviour
 
     private void MoveBullet()
     {
-        Speed += _accelation * Time.deltaTime;
-        Speed = Mathf.Min(Speed, EndSpeed);
-        transform.Translate(Vector3.up * Speed);
+        _currentSpeed += _accelation * Time.deltaTime;
+        _currentSpeed = Mathf.Min(_currentSpeed, _endSpeed);
+        transform.Translate(Vector3.up * _currentSpeed);
     }
 
     private void MoveXAxis()
