@@ -34,10 +34,9 @@ public class Bullet : MonoBehaviour
     {
         if(collision.CompareTag("Enemy") == false) return;
 
-        // GetComponent는 게임 오브젝트에 붙어 있는 컴포넌트를 가져올 수 있다.
         GameObject enemyGameObject = collision.gameObject;
-        Enemy enemy = enemyGameObject.GetComponent<Enemy>();
-        enemy.Hit(Damage);
+        BodyPart bodyPart = enemyGameObject.GetComponent<BodyPart>();
+        bodyPart.Hit(Damage);
         
         Destroy(this.gameObject);
     }

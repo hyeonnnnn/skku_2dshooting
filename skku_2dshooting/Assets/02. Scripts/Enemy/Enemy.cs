@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
 
     public void Hit(float damage)
     {
+        Debug.Log($"Enemy Hit! Damage: {damage}");
         _health -= damage;
 
         if (_health <= 0)
@@ -28,20 +29,20 @@ public class Enemy : MonoBehaviour
         if (collision.CompareTag("Player") == false) return;
 
         GameObject playerGameObject = collision.gameObject;
-        Player playerStatus = playerGameObject.GetComponent<Player>();
+        Player player = playerGameObject.GetComponent<Player>();
         
-        playerStatus.Hit(_damage);
+        player.Hit(_damage);
 
         Destroy(this.gameObject);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("충돌 지속");
+        // Debug.Log("충돌 지속");
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("충돌 종료");
+        // Debug.Log("충돌 종료");
     }
 }
