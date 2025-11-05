@@ -4,6 +4,8 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _enemyPrefab;
     [SerializeField] private float _spawnInterval = 2f;
+    private float _minSpawnInterval = 1f;
+    private float _maxSpawnInterval = 3f;
 
     private float _timer = 0f;
     
@@ -29,7 +31,7 @@ public class EnemySpawner : MonoBehaviour
 
     private void ResetSpawnInterval()
     {
-        float randomNumber = UnityEngine.Random.Range(1f, 3f);
+        float randomNumber = UnityEngine.Random.Range(_minSpawnInterval, _maxSpawnInterval);
         _spawnInterval = randomNumber;
     }
 }
