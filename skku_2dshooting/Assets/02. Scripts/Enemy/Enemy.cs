@@ -3,8 +3,9 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("스탯")]
-    public float Health = 100f;
+    private float _health = 100f;
     private float _speed = 3.0f;
+    private float _damage = 1f;
 
     private void Update()
     {
@@ -12,18 +13,25 @@ public class Enemy : MonoBehaviour
         transform.Translate(direction * _speed * Time.deltaTime);
     }
 
+    public void Hit(float damage)
+    {
+        _health -= damage;
+
+        if (_health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") == false) return;
 
         GameObject playerGameObject = collision.gameObject;
-        PlayerStatus playerStatus = playerGameObject.GetComponent<PlayerStatus>();
-        playerStatus.LifeCount -= 1;
+        Player playerStatus = playerGameObject.GetComponent<Player>();
+        
+        playerStatus.Hit(_damage);
 
-        if (playerStatus.LifeCount <= 0)
-        {
-            Destroy(playerGameObject);
-        }
         Destroy(this.gameObject);
     }
 

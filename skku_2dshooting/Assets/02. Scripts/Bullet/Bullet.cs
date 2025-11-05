@@ -37,15 +37,9 @@ public class Bullet : MonoBehaviour
         // GetComponent는 게임 오브젝트에 붙어 있는 컴포넌트를 가져올 수 있다.
         GameObject enemyGameObject = collision.gameObject;
         Enemy enemy = enemyGameObject.GetComponent<Enemy>();
-        enemy.Health -= Damage;
-        Debug.Log($"Enemy Health: {enemy.Health}");
-
+        enemy.Hit(Damage);
+        
         Destroy(this.gameObject);
-
-        if (enemy.Health <= 0)
-        {
-            Destroy(enemyGameObject);
-        }
     }
 
 }
