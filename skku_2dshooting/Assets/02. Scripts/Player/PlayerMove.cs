@@ -3,26 +3,27 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [Header("능력치")]
-    public float Speed = 2f;
-    public float MaxSpeed = 10f;
-    public float MinSpeed = 0.1f;
-    public float SpeedIncrement = 0.05f;
-    public float SpeedDashAmount = 1.5f;
+    private float _speed = 2f;
+    private float _maxSpeed = 10f;
+    private float _minSpeed = 0.1f;
+    private float _speedIncrement = 0.05f;
+    private float _speedDashAmount = 3f;
 
     [Header("이동범위")]
-    public float MaxX = 2;
-    public float MinX = -2;
-    public float MaxY = 5;
-    public float MinY = -5;
+    private float _maxX = 2;
+    private float _minX = -2;
+    private float _maxY = 5;
+    private float _minY = -5;
 
+    [Header("시작위치")]
     private Vector2 _originPosition;
 
-    void Start()
+    private void Start()
     {
         _originPosition = transform.position;
     }
 
-    void Update()
+    private void Update()
     {
         HandleSpeedAdjustment();
         HandleMovement();
@@ -32,27 +33,27 @@ public class PlayerMove : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Q))
         {
-            Speed += SpeedIncrement;
+            _speed += _speedIncrement;
         }
         else if (Input.GetKey(KeyCode.E))
         {
-            Speed -= SpeedIncrement;
+            _speed -= _speedIncrement;
         }
 
-        Speed = Mathf.Clamp(Speed, MinSpeed, MaxSpeed);
+        _speed = Mathf.Clamp(_speed, _minSpeed, _maxSpeed);
     }
     
     private void HandleMovement()
     {
-        float speed = Speed;
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        float finalSpeed = _speed;
+        if (Input.GetKey(KeyCode.LeftShift))
         {
-            speed *= SpeedDashAmount;
+            finalSpeed *= _speedDashAmount;
         }
 
         if (Input.GetKey(KeyCode.R))
         {
-            TranslateToOrigin(speed);
+            TranslateToOrigin(finalSpeed);
             return;
         }
 
@@ -65,24 +66,10 @@ public class PlayerMove : MonoBehaviour
 
         Vector2 position = transform.position;
 
-        Vector2 newPosition = position + (direction * speed) * Time.deltaTime;
+        Vector2 newPosition = position + (direction * finalSpeed) * Time.deltaTime;
 
-        if (newPosition.x > MaxX)
-        {
-            newPosition.x = MinX;
-        }
-        else if (newPosition.x < MinX)
-        {
-            newPosition.x = MaxX;
-        }
-        if (newPosition.y > MaxY)
-        {
-            newPosition.y = MaxY;
-        }
-        else if (newPosition.y < MinY)
-        {
-            newPosition.y = MinY;
-        }
+        newPosition.x = Mathf.Clamp(newPosition.x, _minX, _maxX);
+        newPosition.y = Mathf.Clamp(newPosition.y, _minY, _maxY);
 
         transform.position = newPosition;
     }

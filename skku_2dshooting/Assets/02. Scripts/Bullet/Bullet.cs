@@ -4,17 +4,13 @@ public class Bullet : MonoBehaviour
 {
     [Header("이동 속도")]
     private float _currentSpeed;
-    private float _startSpeed = 0.01f;
+    private float _startSpeed = 0.02f;
     private float _endSpeed = 0.03f;
-    private float _duration = 0.2f;
+    private float _duration = 0.3f;
     private float _accelation;
 
-    [Header("총알 움직임")]
-    private float _minX = -1.0f;
-    private float _maxX = 1.0f;
-    private float _moveStep = 0.01f;
-    private float _moveDistance = 0f;
-    private bool _isMoveLeft = true;
+    [Header("스탯")]
+    public float Damage;
 
     private void Start()
     {
@@ -25,7 +21,6 @@ public class Bullet : MonoBehaviour
     private void Update()
     {
         MoveBullet();
-        MoveXAxis();
     }
 
     private void MoveBullet()
@@ -35,30 +30,22 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector3.up * _currentSpeed);
     }
 
-    private void MoveXAxis()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Vector2 bulletPosition = transform.localPosition;
+        if(collision.CompareTag("Enemy") == false) return;
 
-        if (_isMoveLeft)
-        {
-            bulletPosition.x -= _moveStep;
-            _moveDistance -= _moveStep;
-        }
-        else
-        {
-            bulletPosition.x += _moveStep;
-            _moveDistance += _moveStep;
-        }
+        // GetComponent는 게임 오브젝트에 붙어 있는 컴포넌트를 가져올 수 있다.
+        GameObject enemyGameObject = collision.gameObject;
+        Enemy enemy = enemyGameObject.GetComponent<Enemy>();
+        enemy.Health -= Damage;
+        Debug.Log($"Enemy Health: {enemy.Health}");
 
-        transform.localPosition = bulletPosition;
+        Destroy(this.gameObject);
 
-        if (_moveDistance < _minX)
+        if (enemy.Health <= 0)
         {
-            _isMoveLeft = false;
-        }
-        else if (_moveDistance > _maxX)
-        {
-            _isMoveLeft = true;
+            Destroy(enemyGameObject);
         }
     }
+
 }

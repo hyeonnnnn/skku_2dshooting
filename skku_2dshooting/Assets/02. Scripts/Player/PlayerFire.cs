@@ -5,20 +5,21 @@ using static UnityEditor.PlayerSettings;
 public class PlayerFire : MonoBehaviour
 {
     [Header("총알 프리팹")]
-    public GameObject BulletPrefab;
-    public GameObject SubBulletPrefab;
+    [SerializeField] private GameObject _bulletPrefab;
+    [SerializeField] private GameObject _subBulletPrefab;
 
     [Header("총구")]
-    public Transform LeftFirePosition;
-    public Transform RightFirePosition;
-    public Transform LeftSubFirePosition;
-    public Transform RightSubFirePosition;
+    [SerializeField] private Transform _leftFirePosition;
+    [SerializeField] private Transform _rightFirePosition;
+    [SerializeField] private Transform _leftSubFirePosition;
+    [SerializeField] private Transform _rightSubFirePosition;
 
     [Header("쿨타임")]
     private float _cooltimer = 0f;
-    private float _coolTime = 0.2f;
-    
-    private bool _isAutoAttackMode = true;
+    private float _coolTime = 0.5f;
+
+    [Header("자동 모드")]
+    private bool _isAutoMode = true;
 
     private void Update()
     {
@@ -29,32 +30,21 @@ public class PlayerFire : MonoBehaviour
     private void TryFireBullet()
     {
         _cooltimer += Time.deltaTime;
-        if (_coolTime < 0) return; // 조기 리턴
+        if (_cooltimer < _coolTime) return;
 
-        if (_cooltimer > _coolTime)
+        if (Input.GetKey(KeyCode.Space)||_isAutoMode)
         {
-            if (_isAutoAttackMode == true)
-            {
-                FireBullet();
-                _cooltimer = 0f;
-            }
-            else if (_isAutoAttackMode == false)
-            {
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    FireBullet();
-                    _cooltimer = 0f;
-                }
-            }
+            _cooltimer = 0f;
+            MakeBullets();
         }
     }
 
-    private void FireBullet()
+    private void MakeBullets()
     {
-        InstantiateBullet(BulletPrefab, LeftFirePosition);
-        InstantiateBullet(BulletPrefab, RightFirePosition);
-        InstantiateBullet(SubBulletPrefab, LeftSubFirePosition);
-        InstantiateBullet(SubBulletPrefab, RightSubFirePosition);
+        InstantiateBullet(_bulletPrefab, _leftFirePosition);
+        InstantiateBullet(_bulletPrefab, _rightFirePosition);
+        InstantiateBullet(_subBulletPrefab, _leftSubFirePosition);
+        InstantiateBullet(_subBulletPrefab, _rightSubFirePosition);
     }
 
     private void InstantiateBullet(GameObject prefab, Transform firePosition)
@@ -64,15 +54,7 @@ public class PlayerFire : MonoBehaviour
 
     private void ChangeAttackMode()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            _isAutoAttackMode = true;
-            Debug.Log("자동 공격 모드");
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            _isAutoAttackMode = false;
-            Debug.Log("수동 공격 모드");
-        }
+        if (Input.GetKeyDown(KeyCode.Alpha1)) _isAutoMode = true;
+        else if (Input.GetKeyDown(KeyCode.Alpha2))_isAutoMode = false;
     }
 }
