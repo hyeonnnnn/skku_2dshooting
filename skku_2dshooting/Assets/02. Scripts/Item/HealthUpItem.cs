@@ -16,10 +16,10 @@ public class HealthUpItem : Item
     {
         Player player = collision.GetComponent<Player>();
         player.HealthUp(_healthUpValue);
-        Dissapear();
+        Disappear();
     }
 
-    protected override void Dissapear()
+    protected override void Disappear()
     {
         Destroy(gameObject);
     }

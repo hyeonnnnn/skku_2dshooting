@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 6350533948576700244}
   - component: {fileID: -1235166533880187848}
   - component: {fileID: -963040483187428978}
+  - component: {fileID: -3220088770489724332}
   m_Layer: 0
   m_Name: DashEnemy
   m_TagString: Enemy
@@ -446,6 +447,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 160
+  _itemDrop: {fileID: 0}
 --- !u!114 &-1235166533880187848
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,3 +475,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageMultiplier: 0.4
+--- !u!114 &-3220088770489724332
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329935954921573342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2706ee898b5fdb645802850062cec248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemDropTable: {fileID: 11400000, guid: e8746e1bb9528624d8c7f99f18422a9e, type: 2}

@@ -16,10 +16,10 @@ public class MoveSpeedUpItem : Item
     {
         PlayerMove playerMove = collision.GetComponent<PlayerMove>();
         playerMove.SpeedUp(_speedValue);
-        Dissapear();
+        Disappear();
     }
 
-    protected override void Dissapear()
+    protected override void Disappear()
     {
         Destroy(gameObject);
     }

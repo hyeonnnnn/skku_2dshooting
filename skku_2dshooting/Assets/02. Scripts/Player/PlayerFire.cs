@@ -17,7 +17,7 @@ public class PlayerFire : MonoBehaviour
     [Header("쿨타임")]
     private float _cooltimer = 0f;
     private float _coolTime = 0.8f;
-    private float _minCoolTime = 0.1f;
+    private float _minCoolTime = 0.4f;
 
     [Header("자동 모드")]
     private bool _isAutoMode = true;

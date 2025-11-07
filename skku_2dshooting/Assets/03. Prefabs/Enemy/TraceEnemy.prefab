@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7342554145941780440}
   - component: {fileID: 6588366124263738031}
   - component: {fileID: 6248027467063139891}
+  - component: {fileID: -2654229081328323826}
   m_Layer: 0
   m_Name: TraceEnemy
   m_TagString: Enemy
@@ -192,6 +193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 150
+  _itemDrop: {fileID: 0}
 --- !u!114 &6588366124263738031
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,3 +220,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
+--- !u!114 &-2654229081328323826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4451338402280819413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2706ee898b5fdb645802850062cec248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemDropTable: {fileID: 11400000, guid: e8746e1bb9528624d8c7f99f18422a9e, type: 2}

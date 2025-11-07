@@ -15,10 +15,10 @@ public class AttackSpeedUpItem : Item
     {
         PlayerFire player = collision.GetComponent<PlayerFire>();
         player.AttackSpeedUp(_attackSpeedValue);
-        Dissapear();
+        Disappear();
     }
 
-    protected override void Dissapear()
+    protected override void Disappear()
     {
         Destroy(gameObject);
     }

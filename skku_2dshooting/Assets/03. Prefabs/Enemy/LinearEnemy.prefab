@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8136428830364874912}
   - component: {fileID: 1504144653667913927}
   - component: {fileID: 9210767878868234231}
+  - component: {fileID: 52069070840458846}
   m_Layer: 0
   m_Name: LinearEnemy
   m_TagString: Enemy
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 170
+  _itemDrop: {fileID: 0}
 --- !u!114 &1504144653667913927
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208,3 +210,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: 2
+--- !u!114 &52069070840458846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2433037162075112835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2706ee898b5fdb645802850062cec248, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _itemDropTable: {fileID: 11400000, guid: e8746e1bb9528624d8c7f99f18422a9e, type: 2}
