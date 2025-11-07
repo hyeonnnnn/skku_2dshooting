@@ -16,8 +16,6 @@ public class PlayerMove : MonoBehaviour
     [Header("시작위치")]
     private Vector2 _originPosition;
 
-    public float Speed => _speed;
-
     private void Start()
     {
         _originPosition = transform.position;

@@ -16,7 +16,8 @@ public class PlayerFire : MonoBehaviour
 
     [Header("쿨타임")]
     private float _cooltimer = 0f;
-    private float _coolTime = 0.5f;
+    private float _coolTime = 0.8f;
+    private float _minCoolTime = 0.1f;
 
     [Header("자동 모드")]
     private bool _isAutoMode = true;
@@ -56,5 +57,11 @@ public class PlayerFire : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) _isAutoMode = true;
         else if (Input.GetKeyDown(KeyCode.Alpha2))_isAutoMode = false;
+    }
+
+    public void AttackSpeedUp(float value)
+    {
+        _coolTime -= value;
+        Mathf.Min(_coolTime, _minCoolTime);
     }
 }

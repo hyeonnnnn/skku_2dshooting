@@ -1,0 +1,25 @@
+using UnityEngine;
+
+public class AttackSpeedUpItem : Item
+{
+    private float _attackSpeedValue = 0.07f;
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            AttackSpeedUp(collision);
+        }
+    }
+    private void AttackSpeedUp(Collider2D collision)
+    {
+        PlayerFire player = collision.GetComponent<PlayerFire>();
+        player.AttackSpeedUp(_attackSpeedValue);
+        Dissapear();
+    }
+
+    protected override void Dissapear()
+    {
+        Destroy(gameObject);
+    }
+}
