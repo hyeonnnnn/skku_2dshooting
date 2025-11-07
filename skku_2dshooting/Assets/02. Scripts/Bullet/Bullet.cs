@@ -3,11 +3,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [Header("이동 속도")]
+    [SerializeField] private float _startSpeed = 0.02f;
+    [SerializeField] private float _endSpeed = 0.03f;
+    [SerializeField] private float _duration = 0.5f;
     private float _currentSpeed;
-    private float _startSpeed = 0.01f;
-    private float _endSpeed = 0.03f;
-    private float _duration = 0.5f;
-    private float _accelation;
+    private float _acceleration;
 
     [Header("스탯")]
     public float Damage;
@@ -15,18 +15,19 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         _currentSpeed = _startSpeed;
-        _accelation = (_endSpeed - _startSpeed) / _duration;
+        _acceleration = (_endSpeed - _startSpeed) / _duration;
     }
 
     private void Update()
     {
-        MoveBullet();
+        Move();
     }
 
-    private void MoveBullet()
+    private void Move()
     {
-        _currentSpeed += _accelation * Time.deltaTime;
+        _currentSpeed += _acceleration * Time.deltaTime;
         _currentSpeed = Mathf.Min(_currentSpeed, _endSpeed);
+
         transform.Translate(Vector3.up * _currentSpeed);
     }
 
@@ -34,11 +35,15 @@ public class Bullet : MonoBehaviour
     {
         if(collision.CompareTag("Enemy") == false) return;
 
-        GameObject enemyGameObject = collision.gameObject;
-        BodyPart bodyPart = enemyGameObject.GetComponent<BodyPart>();
-        bodyPart.Hit(Damage);
-        
-        Destroy(this.gameObject);
+        HandleCollision(collision);
     }
 
+    private void HandleCollision(Collider2D collision)
+    {
+        BodyPart bodyPart = collision.GetComponent<BodyPart>();
+        if (bodyPart == null) return;
+        bodyPart.Hit(Damage);
+
+        Destroy(this.gameObject);
+    }
 }

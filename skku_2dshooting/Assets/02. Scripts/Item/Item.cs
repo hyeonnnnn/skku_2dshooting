@@ -3,22 +3,23 @@ using UnityEngine.UIElements;
 
 public abstract class Item : MonoBehaviour
 {
-    [Header("아이템 이동 설정")]
+    [Header("아이템 이동")]
     [SerializeField] private float _flySpeed = 7f;
     [SerializeField] private float _coolTime = 2f;
+    [SerializeField] private float _curveSpeedFactor = 10f;
 
-    [Header("베지어곡선 설정값")]
+    [Header("베지어곡선 제어")]
+    [SerializeField] private float _controlPointHeightMin = 2f;
+    [SerializeField] private float _controlPointHeightValue = 4f;
+    [SerializeField] private float _controlPointWidthMin = -2f;
+    [SerializeField] private float _controlPointWidthMax = 2f;
+
     private Transform _playerTransform;
     private Vector2 _startPoint;
     private Vector2 _controlPoint;
     private Vector2 _endPoint;
-    private float _curveProgression = 0f;
-    private float _controlPointHeightMin = 2f;
-    private float _controlPointHeightValue = 4f;
-    private float _controlPointWidthMin = -2f;
-    private float _controlPointWidthMax = 2f;
-    private float _curveSpeedFactor = 10f;
 
+    private float _curveProgression = 0f;
     private float _timer = 0f;
     private bool _isFlying = false;
 
@@ -46,8 +47,19 @@ public abstract class Item : MonoBehaviour
         }
     }
 
-    protected abstract void OnTriggerEnter2D(Collider2D collision);
-    protected abstract void Disappear();
+    protected void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") == false) return;
+        OnCollect(collision);
+    }
+
+    protected abstract void OnCollect(Collider2D player);
+
+    protected void Disappear()
+    {
+        Destroy(gameObject);
+    }
+
     protected void StartBezierFly()
     {
         if (_playerTransform == null) return;

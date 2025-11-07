@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class AttackComponent : MonoBehaviour
 {
+    [Header("공격 설정")]
     [SerializeField] private float _damage;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -14,8 +15,8 @@ public class AttackComponent : MonoBehaviour
     {
         if (collision.CompareTag("Player") == false) return;
 
-        GameObject playerGameObject = collision.gameObject;
-        Player player = playerGameObject.GetComponent<Player>();
+        Player player = collision.GetComponent<Player>();
+        if (player == null) return;
 
         player.Hit(_damage);
 

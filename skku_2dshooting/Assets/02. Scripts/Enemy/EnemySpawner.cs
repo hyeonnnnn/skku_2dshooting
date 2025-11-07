@@ -15,6 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [Header("스폰 세팅")]
     private float _minSpawnInterval = 1f;
     private float _maxSpawnInterval = 3f;
+
     private float _spawnInterval = 2f;
     private float _timer = 0f;
     
@@ -35,12 +36,23 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        GameObject randomEnemyPrefab = GetRandomEnemyPrefab();
-        Instantiate(randomEnemyPrefab, transform.position, Quaternion.identity);
+        GameObject enemyPrefab = GetRandomEnemyPrefab();
+        if (enemyPrefab == null)
+        {
+            Debug.LogError("스폰할 적 프리팹이 없습니다.");
+        }
+
+        Instantiate(enemyPrefab, transform.position, Quaternion.identity);
     }
 
     private GameObject GetRandomEnemyPrefab()
     {
+        if (_enemySpawnTable == null || _enemySpawnTable.Length == 0)
+        {
+            Debug.LogError("스폰 테이블이 비어있습니다.");
+            return null;
+        }
+
         float randomValue = Random.value;
         float cumulative = 0f;
 
@@ -56,7 +68,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void ResetSpawnInterval()
     {
-        float randomNumber = UnityEngine.Random.Range(_minSpawnInterval, _maxSpawnInterval);
-        _spawnInterval = randomNumber;
+        _spawnInterval = UnityEngine.Random.Range(_minSpawnInterval, _maxSpawnInterval);
     }
 }

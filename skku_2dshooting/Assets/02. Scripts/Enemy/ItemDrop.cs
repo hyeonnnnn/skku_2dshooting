@@ -1,9 +1,9 @@
 using UnityEngine;
 
 [System.Serializable]
-
 public class ItemDrop : MonoBehaviour
 {
+    [Header("드랍 테이블")]
     [SerializeField] private ItemDropTable _itemDropTable;
 
     public void TryDropItem(Vector2 position)

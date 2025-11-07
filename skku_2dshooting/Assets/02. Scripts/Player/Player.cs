@@ -3,19 +3,31 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("스탯")]
-    private float _health = 5;
+    [SerializeField] private float _maxHealth = 5;
+    private float _currentHealth;
+
+    private void Awake()
+    {
+        _currentHealth = _maxHealth;
+    }
 
     public void Hit(float damage)
     {
-        _health -= damage;
-        if (_health <= 0)
+        _currentHealth -= damage;
+        if (_currentHealth <= 0)
         {
-            Destroy(this.gameObject);
+            Die();
         }
     }
 
     public void HealthUp(float healAmount)
     {
-        _health += healAmount;
+        _currentHealth += healAmount;
+        _currentHealth = Mathf.Min(_maxHealth, _currentHealth);
+    }
+
+    private void Die()
+    {
+        Destroy(this.gameObject);
     }
 }

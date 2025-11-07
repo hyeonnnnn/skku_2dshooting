@@ -2,21 +2,24 @@ using UnityEngine;
 
 public class MoveTraceComponent : MoveComponent
 {
-    private GameObject _playerObject;
+    private Transform _playerTransform;
 
-    private void Start()
+    private void Awake()
     {
-        _playerObject = GameObject.FindWithTag("Player");
+        GameObject playerObject = GameObject.FindWithTag("Player");
+        
+        if (playerObject != null)
+        {
+            _playerTransform = playerObject.transform;
+        }
     }
 
     // 플레이어를 따라 이동
     protected override void Move()
     {
-        if (_playerObject != null)
-        {
-            Vector2 playerPosition = _playerObject.transform.position;
-            Vector2 direction = (playerPosition - (Vector2)transform.position).normalized;
-            transform.Translate(direction * _moveSpeed * Time.deltaTime);
-        }
+        if (_playerTransform == null) return;
+
+        Vector2 direction = (_playerTransform.position - transform.position).normalized;
+        transform.Translate(direction * _moveSpeed * Time.deltaTime);
     }
 }

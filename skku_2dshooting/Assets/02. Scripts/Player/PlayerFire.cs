@@ -15,32 +15,39 @@ public class PlayerFire : MonoBehaviour
     [SerializeField] private Transform _rightSubFirePosition;
 
     [Header("쿨타임")]
-    private float _cooltimer = 0f;
-    private float _coolTime = 0.8f;
+    private float _baseCoolTime = 0.8f;
     private float _minCoolTime = 0.4f;
+    private float _currentCoolTime = 0f;
+    private float _cooltimer = 0f;
 
-    [Header("자동 모드")]
+    [Header("공격 모드")]
     private bool _isAutoMode = true;
+
+
+    private void Awake()
+    {
+        _currentCoolTime = _baseCoolTime;
+    }
 
     private void Update()
     {
-        TryFireBullet();
-        ChangeAttackMode();
+        TryFire();
+        SwitchAttackMode();
     }
 
-    private void TryFireBullet()
+    private void TryFire()
     {
         _cooltimer += Time.deltaTime;
-        if (_cooltimer < _coolTime) return;
+        if (_cooltimer < _currentCoolTime) return;
 
         if (Input.GetKey(KeyCode.Space)||_isAutoMode)
         {
             _cooltimer = 0f;
-            MakeBullets();
+            FireBullets();
         }
     }
 
-    private void MakeBullets()
+    private void FireBullets()
     {
         InstantiateBullet(_bulletPrefab, _leftFirePosition);
         InstantiateBullet(_bulletPrefab, _rightFirePosition);
@@ -53,15 +60,14 @@ public class PlayerFire : MonoBehaviour
         GameObject bullet = Instantiate(prefab, firePosition.position, Quaternion.identity);
     }
 
-    private void ChangeAttackMode()
+    private void SwitchAttackMode()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) _isAutoMode = true;
-        else if (Input.GetKeyDown(KeyCode.Alpha2))_isAutoMode = false;
+        if (Input.GetKeyDown(KeyCode.Alpha2))_isAutoMode = false;
     }
 
     public void AttackSpeedUp(float value)
     {
-        _coolTime -= value;
-        Mathf.Min(_coolTime, _minCoolTime);
+        _currentCoolTime = Mathf.Max(_currentCoolTime - value, _minCoolTime);
     }
 }

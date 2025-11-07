@@ -2,7 +2,9 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
+    [Header("체력 설정")]
     [SerializeField] private float _health;
+    
     private ItemDrop _itemDrop;
 
     private void Awake()
@@ -24,10 +26,7 @@ public class HealthComponent : MonoBehaviour
 
     private void Die()
     {
-        Vector2 position = transform.position;
-
-        _itemDrop.TryDropItem(position);
-
+        _itemDrop.TryDropItem(transform.position);
         Destroy(gameObject);
     }
 
