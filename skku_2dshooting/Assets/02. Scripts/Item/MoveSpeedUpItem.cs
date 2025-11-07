@@ -6,7 +6,6 @@ public class MoveSpeedUpItem : Item
 
     protected override void OnCollect(Collider2D collision)
     {
-        Debug.Log("이속 증가");
         PlayerMove playerMove = collision.GetComponent<PlayerMove>();
         playerMove.SpeedUp(_speedValue);
         Disappear();
