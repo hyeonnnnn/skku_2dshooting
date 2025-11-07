@@ -4,10 +4,8 @@ public class PlayerMove : MonoBehaviour
 {
     [Header("능력치")]
     private float _speed = 2f;
-    private float _maxSpeed = 10f;
-    private float _minSpeed = 0.1f;
-    private float _speedIncrement = 0.05f;
     private float _speedDashAmount = 3f;
+    private float MaxSpeed = 10f;
 
     [Header("이동범위")]
     private float _maxX = 2;
@@ -18,6 +16,8 @@ public class PlayerMove : MonoBehaviour
     [Header("시작위치")]
     private Vector2 _originPosition;
 
+    public float Speed => _speed;
+
     private void Start()
     {
         _originPosition = transform.position;
@@ -25,22 +25,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Update()
     {
-        HandleSpeedAdjustment();
         HandleMovement();
-    }
-
-    private void HandleSpeedAdjustment()
-    {
-        if (Input.GetKey(KeyCode.Q))
-        {
-            _speed += _speedIncrement;
-        }
-        else if (Input.GetKey(KeyCode.E))
-        {
-            _speed -= _speedIncrement;
-        }
-
-        _speed = Mathf.Clamp(_speed, _minSpeed, _maxSpeed);
     }
     
     private void HandleMovement()
@@ -78,5 +63,12 @@ public class PlayerMove : MonoBehaviour
     {
         Vector2 direction = (_originPosition - (Vector2)transform.position).normalized;
         transform.Translate(direction * speed * Time.deltaTime);
+    }
+
+    public void SpeedUp(float value)
+    {
+        _speed += value;
+
+        _speed = Mathf.Min(_speed, MaxSpeed);
     }
 }
