@@ -1,16 +1,26 @@
 using UnityEngine;
 
-public class HealthUpItem : MonoBehaviour
+public class HealthUpItem : Item
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private float _healthUpValue = 1f;
+
+    protected override void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.CompareTag("Player"))
+        {
+            HealthUp(collision);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HealthUp(Collider2D collision)
     {
-        
+        Player player = collision.GetComponent<Player>();
+        player.HealthUp(_healthUpValue);
+        Dissapear();
+    }
+
+    protected override void Dissapear()
+    {
+        Destroy(gameObject);
     }
 }
