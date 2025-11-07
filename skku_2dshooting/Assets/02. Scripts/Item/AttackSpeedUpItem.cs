@@ -13,6 +13,7 @@ public class AttackSpeedUpItem : Item
     }
     private void AttackSpeedUp(Collider2D collision)
     {
+        Debug.Log("공속 증가");
         PlayerFire player = collision.GetComponent<PlayerFire>();
         player.AttackSpeedUp(_attackSpeedValue);
         Disappear();

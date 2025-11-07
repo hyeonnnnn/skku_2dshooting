@@ -4,9 +4,9 @@ public class Bullet : MonoBehaviour
 {
     [Header("이동 속도")]
     private float _currentSpeed;
-    private float _startSpeed = 0.02f;
+    private float _startSpeed = 0.01f;
     private float _endSpeed = 0.03f;
-    private float _duration = 0.3f;
+    private float _duration = 0.5f;
     private float _accelation;
 
     [Header("스탯")]

@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class MoveComponent : MonoBehaviour
+public abstract class MoveComponent : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] protected float _moveSpeed;
+
+    private void Update()
     {
-        
+        Move();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    protected abstract void Move();
 }

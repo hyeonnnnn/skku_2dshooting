@@ -14,6 +14,7 @@ public class MoveSpeedUpItem : Item
 
     private void MoveSpeedUp(Collider2D collision)
     {
+        Debug.Log("이속 증가");
         PlayerMove playerMove = collision.GetComponent<PlayerMove>();
         playerMove.SpeedUp(_speedValue);
         Disappear();
