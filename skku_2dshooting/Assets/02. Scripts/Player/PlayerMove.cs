@@ -2,51 +2,40 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [Header("능력치")]
-    private float _speed = 2f;
-    private float _dashMultiplier = 3f;
-    private float _maxSpeed = 10f;
-
-    [Header("시작위치")]
+    private PlayerStatus _playerStatus;
     private Vector2 _originPosition;
 
-    private void Start()
+    private void Awake()
     {
+        _playerStatus = GetComponent<PlayerStatus>();
         _originPosition = transform.position;
     }
 
     public void HandleMovement()
     {
-        float finalSpeed = _speed;
+        float finalSpeed = _playerStatus.BaseSpeed;
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            finalSpeed *= _dashMultiplier;
+            finalSpeed *= _playerStatus.DashMultiplier;
         }
         if (Input.GetKey(KeyCode.R))
         {
-            TranslateToOrigin(finalSpeed);
+            MoveToOrigin(finalSpeed);
             return;
         }
 
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
-
         Vector2 direction = new Vector2(h, v).normalized;
+        
         Vector2 newPosition = (Vector2)transform.position + (direction * finalSpeed) * Time.deltaTime;
-
         transform.position = newPosition;
     }
 
-    private void TranslateToOrigin(float speed)
+    private void MoveToOrigin(float speed)
     {
         Vector2 direction = (_originPosition - (Vector2)transform.position).normalized;
         transform.Translate(direction * speed * Time.deltaTime);
-    }
-
-    public void SpeedUp(float value)
-    {
-        _speed += value;
-        _speed = Mathf.Min(_speed, _maxSpeed);
     }
 }

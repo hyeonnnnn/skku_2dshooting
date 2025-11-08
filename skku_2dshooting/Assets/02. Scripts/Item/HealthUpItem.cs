@@ -6,7 +6,7 @@ public class HealthUpItem : Item
 
     protected override void OnCollect(Collider2D collision)
     {
-        Player player = collision.GetComponent<Player>();
+        PlayerStatus player = collision.GetComponent<PlayerStatus>();
         player.HealthUp(_healthUpValue);
         Disappear();
     }

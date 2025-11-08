@@ -15,7 +15,7 @@ public class AttackComponent : MonoBehaviour
     {
         if (collision.CompareTag("Player") == false) return;
 
-        Player player = collision.GetComponent<Player>();
+        PlayerStatus player = collision.GetComponent<PlayerStatus>();
         if (player == null) return;
 
         player.TakeDamage(_damage);

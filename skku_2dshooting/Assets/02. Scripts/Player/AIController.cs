@@ -6,17 +6,18 @@ public class AIController : MonoBehaviour
     [SerializeField] private float _detectionRange = 6.5f;
     [SerializeField] private float _dangerZoneRange = 1.5f;
     [SerializeField] private float _attackDistance = 3f;
-    [SerializeField] private float _moveSpeed = 3f;
 
     private Transform _target;
     private ContactFilter2D _filter;
     private Collider2D[] _hits;
     private const int MaxHits = 10;
 
+    [Header("회피")]
     [SerializeField] private float _evadeWidthMin = -2f;
     [SerializeField] private float _eavdeWidthMax = 2f;
 
     private StateManager _stateManager;
+    private PlayerStatus _playerStatus;
 
     public Transform GetTarget() => _target;
     public float GetDangerZoneRadius() => _dangerZoneRange;
@@ -25,6 +26,8 @@ public class AIController : MonoBehaviour
     {
         _stateManager = new StateManager();
         _stateManager.SwitchState(new IdleState(this));
+
+        _playerStatus = GetComponent<PlayerStatus>();
 
         // Enemy 레이어만 감지하도록 필터 설정
         _filter = new ContactFilter2D();
@@ -76,7 +79,7 @@ public class AIController : MonoBehaviour
         // 적의 정면으로 이동
         Vector2 targetPosition = _target.position + new Vector3(0, -_attackDistance);
         Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-        transform.Translate(direction * _moveSpeed * Time.deltaTime);
+        transform.Translate(direction * _playerStatus.BaseSpeed * Time.deltaTime);
     }
 
     public void EvadeFromTarget()
@@ -90,7 +93,7 @@ public class AIController : MonoBehaviour
         Vector2 targetPosition = _target.position;
         Vector2 direction = (selfPosition - targetPosition).normalized;
 
-        transform.Translate(direction * _moveSpeed * Time.deltaTime);
+        transform.Translate(direction * _playerStatus.BaseSpeed * Time.deltaTime);
     }
 
     private void OnDrawGizmos()

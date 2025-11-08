@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4089297535473784112}
   - component: {fileID: 6891026622688463924}
   m_Layer: 0
-  m_Name: AttackSpeedUpItemItem
+  m_Name: FireCoolTimeDownItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

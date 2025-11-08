@@ -14,21 +14,18 @@ public class PlayerFire : MonoBehaviour
     [SerializeField] private Transform _leftSubFirePosition;
     [SerializeField] private Transform _rightSubFirePosition;
 
-    [Header("쿨타임")]
-    private float _baseCoolTime = 0.8f;
-    private float _minCoolTime = 0.4f;
-    private float _currentCoolTime = 0f;
+    private PlayerStatus _playerStatus;
     private float _timer = 0f;
 
     private void Awake()
     {
-        _currentCoolTime = _baseCoolTime;
+        _playerStatus = GetComponent<PlayerStatus>();
     }
 
     public void HandleAutolFire()
     {
         _timer += Time.deltaTime;
-        if (_timer < _currentCoolTime) return;
+        if (_timer < _playerStatus.CurrentFireCoolTime) return;
 
         _timer = 0f;
         Fire();
@@ -37,7 +34,7 @@ public class PlayerFire : MonoBehaviour
     public void HandleManualFire()
     {
         _timer += Time.deltaTime;
-        if (_timer < _currentCoolTime) return;
+        if (_timer < _playerStatus.CurrentFireCoolTime) return;
 
         if (Input.GetKey(KeyCode.Space))
         {
@@ -57,10 +54,5 @@ public class PlayerFire : MonoBehaviour
     private void InstantiateBullet(GameObject prefab, Transform firePosition)
     {
         GameObject bullet = Instantiate(prefab, firePosition.position, Quaternion.identity);
-    }
-
-    public void AttackSpeedUp(float value)
-    {
-        _currentCoolTime = Mathf.Max(_currentCoolTime - value, _minCoolTime);
     }
 }

@@ -94,7 +94,7 @@ CircleCollider2D:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IsTrigger: 1
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
@@ -113,6 +113,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _flySpeed: 8
   _coolTime: 2
+  _curveSpeedFactor: 10
+  _controlPointHeightMin: 2
+  _controlPointHeightValue: 4
+  _controlPointWidthMin: -2
+  _controlPointWidthMax: 2
+  _healthUpValue: 1
 --- !u!1 &3870207182042393579
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class MoveSpeedUpItem : Item
+public class FireCoolTimeDownItem : Item
 {
-    [SerializeField] private float _speedValue = 0.2f;
+    [SerializeField] private float _fireCoolTimeDownValue = 0.07f;
 
     protected override void OnCollect(Collider2D collision)
     {
         PlayerStatus playerStatus = collision.GetComponent<PlayerStatus>();
-        playerStatus.MoveSpeedUp(_speedValue);
+        playerStatus.FireCoolTimeDown(_fireCoolTimeDownValue);
         Disappear();
     }
 }
