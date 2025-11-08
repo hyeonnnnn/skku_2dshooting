@@ -18,7 +18,7 @@ public class AttackComponent : MonoBehaviour
         Player player = collision.GetComponent<Player>();
         if (player == null) return;
 
-        player.Hit(_damage);
+        player.TakeDamage(_damage);
 
         Destroy(this.gameObject);
     }
