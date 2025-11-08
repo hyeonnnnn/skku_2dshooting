@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1529561874470167726}
   - component: {fileID: 7239231298112426737}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 983291861533223885}
   - component: {fileID: 3924455191000242395}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 6248027467063139891}
   - component: {fileID: -2654229081328323826}
   - component: {fileID: 6561475426044257901}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TraceEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -363,7 +363,7 @@ GameObject:
   m_Component:
   - component: {fileID: 827519096203113801}
   - component: {fileID: 509090032134486396}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hexagon Point Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,7 +455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6848138928477678523}
   - component: {fileID: 4106088344161122305}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -542,7 +542,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3472540700245105781}
   - component: {fileID: 6579698820448236005}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,7 +629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 354010936504448164}
   - component: {fileID: 5274990490239320810}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,7 +717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4927569842096512562}
   - component: {fileID: 7649666564567439474}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

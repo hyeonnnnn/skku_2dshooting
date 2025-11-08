@@ -27,13 +27,12 @@ public class MoveState : IState
         // 타겟 정면으로 이동
         _aiController.MoveTowardsTarget();
 
+        // 위험 반경에 들어오면 EvadeState로 전환
         float _dangerZoneRadious = _aiController.GetDangerZoneRadius();
         float distance = Vector2.Distance(_aiController.transform.position, target.position);
         if(distance > _dangerZoneRadious) return;
-
-        // 위험 반경에 들어오면 EvadeState로 전환
+        
         _aiController.SwitchState(new EvadeState(_aiController));
-        Debug.Log("위험 반경에 적이 있음");
     }
 
     public void Exit()

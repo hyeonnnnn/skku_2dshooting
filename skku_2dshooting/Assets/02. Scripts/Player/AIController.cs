@@ -9,6 +9,13 @@ public class AIController : MonoBehaviour
     [SerializeField] private float _moveSpeed = 3f;
 
     private Transform _target;
+    private ContactFilter2D _filter;
+    private Collider2D[] _hits;
+    private const int MaxHits = 10;
+
+    [SerializeField] private float _evadeWidthMin = -2f;
+    [SerializeField] private float _eavdeWidthMax = 2f;
+
     private StateManager _stateManager;
 
     public Transform GetTarget() => _target;
@@ -18,6 +25,13 @@ public class AIController : MonoBehaviour
     {
         _stateManager = new StateManager();
         _stateManager.SwitchState(new IdleState(this));
+
+        // Enemy 레이어만 감지하도록 필터 설정
+        _filter = new ContactFilter2D();
+        _filter.SetLayerMask(LayerMask.GetMask("Enemy"));
+        _filter.useTriggers = true;
+
+        _hits = new Collider2D[MaxHits];
     }
 
     private void Update()
@@ -32,14 +46,15 @@ public class AIController : MonoBehaviour
 
     public Transform DetectTarget()
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, _detectionRadius);
+        Physics2D.OverlapCircle(transform.position, _detectionRadius, _filter, _hits);
 
         float closestDistance = Mathf.Infinity;
         Transform closestTarget = null;
 
         // 가장 가까운 적 탐색
-        foreach (Collider2D hit in hits)
+        foreach (Collider2D hit in _hits)
         {
+            if (hit == null) continue;
             if (hit.gameObject.CompareTag("Enemy") == false) continue;
 
             float distance = Vector2.Distance(transform.position, hit.transform.position);
@@ -69,7 +84,12 @@ public class AIController : MonoBehaviour
         if (_target == null) return;
 
         // 적으로부터 멀어지기
-        Vector2 direction = (transform.position - _target.position).normalized;
+        float widthOffset = Random.Range(_evadeWidthMin, _eavdeWidthMax);
+
+        Vector2 selfPosition = (Vector2)transform.position + new Vector2(widthOffset, 0);
+        Vector2 targetPosition = _target.position;
+        Vector2 direction = (selfPosition - targetPosition).normalized;
+
         transform.Translate(direction * _moveSpeed * Time.deltaTime);
     }
 

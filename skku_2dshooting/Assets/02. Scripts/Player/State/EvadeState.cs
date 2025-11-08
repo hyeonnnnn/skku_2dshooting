@@ -30,7 +30,7 @@ public class EvadeState : IState
         // 충분히 멀어졌으면 IdleState로 전환
         float _dangerZoneRadious = _aiController.GetDangerZoneRadius();
         float distance = Vector2.Distance(_aiController.transform.position, target.position);
-        if (distance > _dangerZoneRadious) return;
+        if (distance < _dangerZoneRadious) return;
 
         _aiController.SwitchState(new IdleState(_aiController));
     }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4353377973329600277}
   - component: {fileID: 259517374921382227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -97,7 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8535831473960211187}
   - component: {fileID: 8267007997606880643}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 9210767878868234231}
   - component: {fileID: 52069070840458846}
   - component: {fileID: 305391220636692865}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LinearEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -294,6 +294,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moveSpeed: 1
+  _direction: {x: 0, y: -1}
 --- !u!114 &52069070840458846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7614015142810285501}
   - component: {fileID: 6885703464291566300}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -451,7 +452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8688831977369173401}
   - component: {fileID: 5949983384606603132}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -538,7 +539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2720666128505570333}
   - component: {fileID: 8882030555550637040}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
