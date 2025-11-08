@@ -4,14 +4,8 @@ public class PlayerMove : MonoBehaviour
 {
     [Header("능력치")]
     private float _speed = 2f;
-    private float _speedDashAmount = 3f;
-    private float MaxSpeed = 10f;
-
-    [Header("이동범위")]
-    private float _maxX = 2;
-    private float _minX = -2;
-    private float _maxY = 5;
-    private float _minY = -5;
+    private float _dashMultiplier = 3f;
+    private float _maxSpeed = 10f;
 
     [Header("시작위치")]
     private Vector2 _originPosition;
@@ -21,19 +15,14 @@ public class PlayerMove : MonoBehaviour
         _originPosition = transform.position;
     }
 
-    private void Update()
-    {
-        HandleMovement();
-    }
-    
-    private void HandleMovement()
+    public void HandleMovement()
     {
         float finalSpeed = _speed;
+
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            finalSpeed *= _speedDashAmount;
+            finalSpeed *= _dashMultiplier;
         }
-
         if (Input.GetKey(KeyCode.R))
         {
             TranslateToOrigin(finalSpeed);
@@ -43,16 +32,8 @@ public class PlayerMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
 
-        Vector2 direction = new Vector2(h, v);
-
-        direction.Normalize();
-
-        Vector2 position = transform.position;
-
-        Vector2 newPosition = position + (direction * finalSpeed) * Time.deltaTime;
-
-        newPosition.x = Mathf.Clamp(newPosition.x, _minX, _maxX);
-        newPosition.y = Mathf.Clamp(newPosition.y, _minY, _maxY);
+        Vector2 direction = new Vector2(h, v).normalized;
+        Vector2 newPosition = (Vector2)transform.position + (direction * finalSpeed) * Time.deltaTime;
 
         transform.position = newPosition;
     }
@@ -66,7 +47,6 @@ public class PlayerMove : MonoBehaviour
     public void SpeedUp(float value)
     {
         _speed += value;
-
-        _speed = Mathf.Min(_speed, MaxSpeed);
+        _speed = Mathf.Min(_speed, _maxSpeed);
     }
 }

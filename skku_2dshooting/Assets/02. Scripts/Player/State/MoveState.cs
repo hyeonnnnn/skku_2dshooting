@@ -14,7 +14,7 @@ public class MoveState : IState
 
     }
 
-    public void Update()
+    public void Execute()
     {
         // 타겟 감지
         Transform target = _aiController.DetectTarget();

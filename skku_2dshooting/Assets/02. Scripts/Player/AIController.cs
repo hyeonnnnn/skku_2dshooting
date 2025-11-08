@@ -3,8 +3,8 @@ using UnityEngine;
 public class AIController : MonoBehaviour
 {
     [Header("탐지 및 이동")]
-    [SerializeField] private float _detectionRadius = 4f;
-    [SerializeField] private float _dangerZoneRadius = 1f;
+    [SerializeField] private float _detectionRange = 6.5f;
+    [SerializeField] private float _dangerZoneRange = 1.5f;
     [SerializeField] private float _attackDistance = 3f;
     [SerializeField] private float _moveSpeed = 3f;
 
@@ -19,7 +19,7 @@ public class AIController : MonoBehaviour
     private StateManager _stateManager;
 
     public Transform GetTarget() => _target;
-    public float GetDangerZoneRadius() => _dangerZoneRadius;
+    public float GetDangerZoneRadius() => _dangerZoneRange;
 
     private void Awake()
     {
@@ -34,7 +34,7 @@ public class AIController : MonoBehaviour
         _hits = new Collider2D[MaxHits];
     }
 
-    private void Update()
+    public void UpdateAI()
     {
         _stateManager.Update();
     }
@@ -46,7 +46,7 @@ public class AIController : MonoBehaviour
 
     public Transform DetectTarget()
     {
-        Physics2D.OverlapCircle(transform.position, _detectionRadius, _filter, _hits);
+        Physics2D.OverlapCircle(transform.position, _detectionRange, _filter, _hits);
 
         float closestDistance = Mathf.Infinity;
         Transform closestTarget = null;
@@ -95,9 +95,9 @@ public class AIController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _detectionRadius);
-        Gizmos.DrawWireSphere(transform.position, _dangerZoneRadius);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, _detectionRange);
+        Gizmos.DrawWireSphere(transform.position, _dangerZoneRange);
     }
 
 }

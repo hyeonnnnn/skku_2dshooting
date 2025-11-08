@@ -21,7 +21,7 @@ public class StateManager
     {
         if(_currentState != null)
         {
-            _currentState.Update();
+            _currentState.Execute();
         }
     }
 }

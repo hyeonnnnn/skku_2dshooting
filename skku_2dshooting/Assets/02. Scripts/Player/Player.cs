@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
 
     private void Die()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 
     private IEnumerator FlashHitColor()
