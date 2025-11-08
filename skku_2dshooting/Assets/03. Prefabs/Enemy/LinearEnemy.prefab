@@ -184,12 +184,12 @@ GameObject:
   m_Component:
   - component: {fileID: 8542132559068692341}
   - component: {fileID: 4101712165658347662}
-  - component: {fileID: 3654399395423974392}
   - component: {fileID: 8136428830364874912}
   - component: {fileID: 1504144653667913927}
   - component: {fileID: 9210767878868234231}
   - component: {fileID: 52069070840458846}
   - component: {fileID: 305391220636692865}
+  - component: {fileID: 8569461788404841819}
   m_Layer: 7
   m_Name: LinearEnemy
   m_TagString: Enemy
@@ -242,19 +242,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3654399395423974392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2433037162075112835}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76e214c5d28ccce4e8ef3dafdce38032, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damageMultiplier: 1
 --- !u!114 &8136428830364874912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,6 +341,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8569461788404841819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2433037162075112835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e214c5d28ccce4e8ef3dafdce38032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageMultiplier: 1
 --- !u!1 &7491929597219590533
 GameObject:
   m_ObjectHideFlags: 0

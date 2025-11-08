@@ -11,7 +11,7 @@ public class IdleState : IState
 
     public void Enter()
     {
-        Debug.Log("Idle State에 들어옴");
+
     }
 
     public void Update()
@@ -25,6 +25,6 @@ public class IdleState : IState
 
     public void Exit()
     {
-        Debug.Log("Idle State에서 나감");
+
     }
 }

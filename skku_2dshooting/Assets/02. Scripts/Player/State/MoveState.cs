@@ -11,7 +11,7 @@ public class MoveState : IState
 
     public void Enter()
     {
-        Debug.Log("Move State에 들어옴");
+
     }
 
     public void Update()
@@ -37,6 +37,6 @@ public class MoveState : IState
 
     public void Exit()
     {
-        Debug.Log("Move State에서 나감");
+
     }
 }

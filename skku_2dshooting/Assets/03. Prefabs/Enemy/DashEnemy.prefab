@@ -449,8 +449,8 @@ GameObject:
   - component: {fileID: 5806206270580939105}
   - component: {fileID: 6350533948576700244}
   - component: {fileID: -1235166533880187848}
-  - component: {fileID: -963040483187428978}
   - component: {fileID: -3220088770489724332}
+  - component: {fileID: 470261685891527051}
   m_Layer: 7
   m_Name: DashEnemy
   m_TagString: Enemy
@@ -584,20 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 0.7
   _dashSpeed: 4.5
-  _detectionRadius: 2.5
---- !u!114 &-963040483187428978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7329935954921573342}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76e214c5d28ccce4e8ef3dafdce38032, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _damageMultiplier: 0.8
+  _detectionRange: 2.5
 --- !u!114 &-3220088770489724332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +598,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemDropTable: {fileID: 11400000, guid: e8746e1bb9528624d8c7f99f18422a9e, type: 2}
+--- !u!114 &470261685891527051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329935954921573342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76e214c5d28ccce4e8ef3dafdce38032, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageMultiplier: 1
 --- !u!1 &7803403464849908957
 GameObject:
   m_ObjectHideFlags: 0

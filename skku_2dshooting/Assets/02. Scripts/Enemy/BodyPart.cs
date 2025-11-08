@@ -11,10 +11,7 @@ public class BodyPart : MonoBehaviour
     {
         _health = GetComponentInParent<HealthComponent>();
 
-        if(_health == null)
-        {
-            Debug.LogError("HealthComponent가 없습니다.");
-        }
+        if (_health == null) return;
     }
 
     public void Hit(float baseDamage)

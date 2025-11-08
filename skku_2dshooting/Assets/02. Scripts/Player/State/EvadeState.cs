@@ -11,7 +11,7 @@ public class EvadeState : IState
 
     public void Enter()
     {
-        Debug.Log("Evade State에 들어옴");
+
     }
 
     public void Update()
@@ -37,6 +37,6 @@ public class EvadeState : IState
 
     public void Exit()
     {
-        Debug.Log("Evade State에서 나감");
+
     }
 }
