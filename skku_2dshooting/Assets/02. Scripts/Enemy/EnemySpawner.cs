@@ -1,16 +1,9 @@
 using UnityEngine;
 
-[System.Serializable]
-public struct EnemySpawnData
-{
-    public GameObject EnemyPrefab;
-    public float SpawnChance;
-}
-
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("적 스폰 데이터")]
-    [SerializeField] private EnemySpawnData[] _enemySpawnTable;
+    [Header("적 테이블")]
+    [SerializeField] private EnemyTable _enemyTable;
 
     [Header("스폰 세팅")]
     private float _minSpawnInterval = 1f;
@@ -47,23 +40,20 @@ public class EnemySpawner : MonoBehaviour
 
     private GameObject GetRandomEnemyPrefab()
     {
-        if (_enemySpawnTable == null || _enemySpawnTable.Length == 0)
-        {
-            Debug.LogError("스폰 테이블이 비어있습니다.");
-            return null;
-        }
+        if (_enemyTable == null) return null;
+        if (_enemyTable.enemys.Length == 0) return null;
 
         float randomValue = Random.value;
         float cumulative = 0f;
 
-        foreach (var enemy in _enemySpawnTable)
+        foreach (var enemy in _enemyTable.enemys)
         {
             cumulative += enemy.SpawnChance;
             if (randomValue <= cumulative)
                 return enemy.EnemyPrefab;
         }
 
-        return _enemySpawnTable[_enemySpawnTable.Length - 1].EnemyPrefab;
+        return _enemyTable.enemys[^1].EnemyPrefab;
     }
 
     private void ResetSpawnInterval()

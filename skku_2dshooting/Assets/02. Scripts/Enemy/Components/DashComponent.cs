@@ -35,6 +35,7 @@ public class DashComponent : MonoBehaviour
         if(distance > _detectionRange) return;
 
         _isDashing = true;
+        _direction = (_player.transform.position - transform.position).normalized;
 
         _angleToPlayer = Mathf.Atan2(
             _player.transform.position.y - transform.position.y,
@@ -48,7 +49,6 @@ public class DashComponent : MonoBehaviour
 
         if (_isDashing)
         {
-            _direction = (_player.transform.position - transform.position).normalized;
             transform.Translate(_direction * _dashSpeed * Time.deltaTime);
             transform.rotation = Quaternion.Euler(0, 0, _angleToPlayer + 90f);
         }

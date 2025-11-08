@@ -27,10 +27,9 @@ public class ItemDrop : MonoBehaviour
             if (randomValue <= cumulative)
             {
                 Instantiate(item.ItemPrefab, position, Quaternion.identity);
-                Debug.Log($"Dropped Item: {item.ItemPrefab.name}");
                 return;
             }
         }
-        Instantiate(_itemDropTable.Items[_itemDropTable.Items.Length - 1].ItemPrefab, position, Quaternion.identity);
+        Instantiate(_itemDropTable.Items[^1].ItemPrefab, position, Quaternion.identity);
     }
 }
