@@ -4,9 +4,13 @@ public class HealthComponent : MonoBehaviour
 {
     [Header("체력 설정")]
     [SerializeField] private float _health;
-    
+
+    [Header("이펙트")]
+    [SerializeField] private ParticleSystem _deathEffect;
+
     private bool _isDead = false;
     private ItemDrop _itemDrop;
+
 
     private void Awake()
     {
@@ -27,6 +31,9 @@ public class HealthComponent : MonoBehaviour
     {
         if(_isDead == true) return;
         _isDead = true;
+
+        if (_deathEffect == null) return;
+        Instantiate(_deathEffect, transform.position, Quaternion.identity);
 
         _itemDrop.TryDropItem(transform.position);
         Destroy(gameObject);
