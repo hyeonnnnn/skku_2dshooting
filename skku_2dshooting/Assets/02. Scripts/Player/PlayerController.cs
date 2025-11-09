@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     [Header("전투 모드")]
     [SerializeField] private bool _isAutoCombatMode = true;
 
-    [Header("화면 제한")]
+    [Header("이동 제한")]
     [SerializeField] private float _padding = 0.3f;
     private Camera _camera;
 

@@ -17,9 +17,13 @@ public class MoveTraceComponent : MoveComponent
     // 플레이어를 따라 이동
     protected override void Move()
     {
-        if (_playerTransform == null) return;
+        Vector2 direction = Vector2.down;
 
-        Vector2 direction = (_playerTransform.position - transform.position).normalized;
+        if (_playerTransform != null)
+        {
+            direction = (_playerTransform.position - transform.position).normalized;
+        }
+            
         transform.Translate(direction * _moveSpeed * Time.deltaTime);
     }
 }
