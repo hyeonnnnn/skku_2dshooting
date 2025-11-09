@@ -16,6 +16,10 @@ public class AIController : MonoBehaviour
     [SerializeField] private float _evadeWidthMin = -2f;
     [SerializeField] private float _eavdeWidthMax = 2f;
 
+    [Header("탐지 주기")]
+    [SerializeField] private float _scanInterval = 0.2f;
+    private float _scanTimer = 0;
+
     private StateManager _stateManager;
     private PlayerStatus _playerStatus;
 
@@ -47,29 +51,41 @@ public class AIController : MonoBehaviour
         _stateManager.SwitchState(newState);
     }
 
-    public Transform DetectTarget()
+    public Transform UpdateTarget()
     {
-        Physics2D.OverlapCircle(transform.position, _detectionRange, _filter, _hits);
+        _scanTimer += Time.deltaTime;
+        if (_scanTimer >= _scanInterval)
+        {
+            _scanTimer = 0;
+            _target = DetectTarget();
+        }
+        return _target;
+    }
+
+    private Transform DetectTarget()
+    {
+        int hitCount = Physics2D.OverlapCircle(transform.position, _detectionRange, _filter, _hits);
 
         float closestDistance = Mathf.Infinity;
         Transform closestTarget = null;
 
         // 가장 가까운 적 탐색
-        foreach (Collider2D hit in _hits)
+        for (int i = 0; i < hitCount; i++)
         {
-            if (hit == null) continue;
-            if (hit.gameObject.CompareTag("Enemy") == false) continue;
+            var hit = _hits[i];
+            if (hit == null || hit.CompareTag("Enemy") == false) continue;
 
-            float distance = Vector2.Distance(transform.position, hit.transform.position);
-            if (distance < closestDistance)
+            float sqrDistance = ((Vector2)transform.position - (Vector2)hit.transform.position).sqrMagnitude;
+            if (sqrDistance < closestDistance)
             {
-                closestDistance = distance;
+                closestDistance = sqrDistance;
                 closestTarget = hit.transform;
             }
+
+            _hits[i] = null;
         }
 
-        _target = closestTarget;
-        return _target;
+        return closestTarget;
     }
 
     public void MoveTowardsTarget()

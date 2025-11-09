@@ -10,6 +10,15 @@ public class PlayerController : MonoBehaviour
     [Header("전투 모드")]
     [SerializeField] private bool _isAutoCombatMode = true;
 
+    [Header("화면 제한")]
+    [SerializeField] private float _padding = 0.3f;
+    private Camera _camera;
+
+    private void Awake()
+    {
+        _camera = Camera.main;
+    }
+
     private void Update()
     {
         SwitchCombatMode();
@@ -22,6 +31,8 @@ public class PlayerController : MonoBehaviour
         {
             ManualCombatMode();
         }
+
+        ClampPositionToScreen();
     }
 
     private void SwitchCombatMode()
@@ -52,5 +63,18 @@ public class PlayerController : MonoBehaviour
 
         _playerMove.HandleMovement();
         _playerFire.HandleManualFire();
+    }
+
+    private void ClampPositionToScreen()
+    {
+        if (_camera == null) return;
+
+        Vector3 min = _camera.ViewportToWorldPoint(new Vector3(0, 0, transform.position.z - _camera.transform.position.z));
+        Vector3 max = _camera.ViewportToWorldPoint(new Vector3(1, 1, transform.position.z - _camera.transform.position.z));
+
+        float clampedX = Mathf.Clamp(transform.position.x, min.x + _padding, max.x - _padding);
+        float clampedY = Mathf.Clamp(transform.position.y, min.y + _padding, max.y - _padding);
+
+        transform.position = new Vector3(clampedX, clampedY, transform.position.z);
     }
 }

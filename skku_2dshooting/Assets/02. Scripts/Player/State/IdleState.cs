@@ -16,7 +16,7 @@ public class IdleState : IState
 
     public void Execute()
     {
-        Transform target = _aiController.DetectTarget();
+        Transform target = _aiController.UpdateTarget();
         if (target != null)
         {
             _aiController.SwitchState(new MoveState(_aiController));
