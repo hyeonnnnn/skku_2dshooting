@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMove : MonoBehaviour
+public class PlayerManualMove : MonoBehaviour
 {
     private PlayerStatus _playerStatus;
     private Vector2 _originPosition;

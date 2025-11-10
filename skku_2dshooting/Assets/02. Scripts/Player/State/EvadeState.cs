@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class EvadeState : IState
 {
-    private AIController _aiController;
+    private PlayerAutoMove _aiController;
 
-    public EvadeState(AIController aIController)
+    public EvadeState(PlayerAutoMove aIController)
     {
         _aiController = aIController;
     }

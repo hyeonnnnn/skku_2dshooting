@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class IdleState : IState
 {
-    private AIController _aiController;
+    private PlayerAutoMove _aiController;
 
-    public IdleState(AIController aIController)
+    public IdleState(PlayerAutoMove aIController)
     {
         _aiController = aIController;
     }

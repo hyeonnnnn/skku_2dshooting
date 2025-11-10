@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("컴포넌트")]
-    [SerializeField] private PlayerMove _playerMove;
+    [SerializeField] private PlayerManualMove _playerManualMove;
+    [SerializeField] private PlayerAutoMove _playerAutoMove;
     [SerializeField] private PlayerFire _playerFire;
-    [SerializeField] private AIController _aIController;
 
     [Header("전투 모드")]
     [SerializeField] private bool _isAutoCombatMode = true;
@@ -49,19 +49,19 @@ public class PlayerController : MonoBehaviour
 
     private void AutoCombatMode()
     {
-        _aIController.enabled = true;
-        _playerMove.enabled = false;
+        _playerAutoMove.enabled = true;
+        _playerManualMove.enabled = false;
 
-        _aIController.UpdateAI();
+        _playerAutoMove.UpdateAI();
         _playerFire.HandleAutolFire();
     }
 
     private void ManualCombatMode()
     {
-        _playerMove.enabled = true;
-        _aIController.enabled = false;
+        _playerManualMove.enabled = true;
+        _playerAutoMove.enabled = false;
 
-        _playerMove.HandleMovement();
+        _playerManualMove.HandleMovement();
         _playerFire.HandleManualFire();
     }
 

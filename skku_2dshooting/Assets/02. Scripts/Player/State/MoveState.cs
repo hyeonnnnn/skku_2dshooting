@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class MoveState : IState
 {
-    private AIController _aiController;
+    private PlayerAutoMove _aiController;
 
-    public MoveState(AIController aIController)
+    public MoveState(PlayerAutoMove aIController)
     {
         _aiController = aIController;
     }

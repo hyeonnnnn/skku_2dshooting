@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class AIController : MonoBehaviour
+public class PlayerAutoMove : MonoBehaviour
 {
     [Header("탐지 및 이동")]
     [SerializeField] private float _detectionRange = 6.5f;
