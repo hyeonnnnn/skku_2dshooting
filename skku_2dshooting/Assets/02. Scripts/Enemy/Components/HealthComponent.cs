@@ -11,16 +11,19 @@ public class HealthComponent : MonoBehaviour
     private bool _isDead = false;
     private ItemDrop _itemDrop;
 
+    private Animator _animator;
+
 
     private void Awake()
     {
         _itemDrop = GetComponent<ItemDrop>();
+        _animator = GetComponent<Animator>();
     }
 
     public void TakeDamage(float damage)
     {
         _health -= damage;
-
+        _animator.SetTrigger("Damaged");
         if (_health <= 0)
         {
             Die();

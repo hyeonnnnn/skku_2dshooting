@@ -29,19 +29,20 @@ public class EnemySpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        GameObject enemyPrefab = GetRandomEnemyPrefab();
-        if (enemyPrefab == null)
+        EnemyTable.EnemyData enemyData = GetRandomEnemyPrefab();
+        if (enemyData.EnemyPrefab == null)
         {
             Debug.LogError("스폰할 적 프리팹이 없습니다.");
+            return;
         }
 
-        Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        Instantiate(enemyData.EnemyPrefab, transform.position, Quaternion.identity);
     }
 
-    private GameObject GetRandomEnemyPrefab()
+    private EnemyTable.EnemyData GetRandomEnemyPrefab()
     {
-        if (_enemyTable == null) return null;
-        if (_enemyTable.enemys.Length == 0) return null;
+        if (_enemyTable == null) return default;
+        if (_enemyTable.enemys.Length == 0) return default;
 
         float randomValue = Random.value;
         float cumulative = 0f;
@@ -50,10 +51,10 @@ public class EnemySpawner : MonoBehaviour
         {
             cumulative += enemy.SpawnChance;
             if (randomValue <= cumulative)
-                return enemy.EnemyPrefab;
+                return enemy;
         }
 
-        return _enemyTable.enemys[^1].EnemyPrefab;
+        return _enemyTable.enemys[^1];
     }
 
     private void ResetSpawnInterval()
