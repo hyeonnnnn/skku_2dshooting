@@ -102,9 +102,7 @@ public class PlayerAutoMove : MonoBehaviour
         _direction = (targetPosition - (Vector2)transform.position).normalized;
         transform.Translate(_direction * _playerStatus.BaseSpeed * Time.deltaTime);
 
-        if (_direction.x < 0) _animator.Play("Left");
-        if (_direction.x == 0) _animator.Play("Idle");
-        if (_direction.x > 0) _animator.Play("Right");
+        _animator.SetInteger("x", _direction.x > 0 ? 1 : _direction.x < 0 ? -1 : 0);
     }
 
     public void EvadeFromTarget()
@@ -120,9 +118,7 @@ public class PlayerAutoMove : MonoBehaviour
 
         transform.Translate(_direction * _playerStatus.BaseSpeed * Time.deltaTime);
 
-        if (_direction.x < 0) _animator.Play("Left");
-        if (_direction.x == 0) _animator.Play("Idle");
-        if (_direction.x > 0) _animator.Play("Right");
+        _animator.SetInteger("x", _direction.x > 0 ? 1 : _direction.x < 0 ? -1 : 0);
     }
 
     private void OnDrawGizmos()

@@ -31,9 +31,7 @@ public class PlayerManualMove : MonoBehaviour
         float v = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(h, v).normalized;
 
-        if (direction.x < 0) _animator.Play("Left");
-        if (direction.x == 0) _animator.Play("Idle");
-        if (direction.x > 0) _animator.Play("Right");
+        _animator.SetInteger("x", direction.x > 0 ? 1 : direction.x < 0 ? -1 : 0);
 
         Vector2 newPosition = (Vector2)transform.position + (direction * finalSpeed) * Time.deltaTime;
         transform.position = newPosition;
