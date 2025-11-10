@@ -245,8 +245,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 217e44095580d124c80237a8804df552, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerManualMove: {fileID: 0}
-  _playerAutoMove: {fileID: 0}
+  _playerManualMove: {fileID: 8419302924854974564}
+  _playerAutoMove: {fileID: 4866769954743941829}
   _playerFire: {fileID: 1367815464323181602}
   _isAutoCombatMode: 1
   _padding: 0.3
