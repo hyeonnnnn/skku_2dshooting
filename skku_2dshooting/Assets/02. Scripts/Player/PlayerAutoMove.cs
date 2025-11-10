@@ -6,6 +6,7 @@ public class PlayerAutoMove : MonoBehaviour
     [SerializeField] private float _detectionRange = 6.5f;
     [SerializeField] private float _dangerZoneRange = 1.5f;
     [SerializeField] private float _attackDistance = 3f;
+    private Vector2 _direction;
 
     private Transform _target;
     private ContactFilter2D _filter;
@@ -19,6 +20,8 @@ public class PlayerAutoMove : MonoBehaviour
     [Header("탐지 주기")]
     [SerializeField] private float _scanInterval = 0.2f;
     private float _scanTimer = 0;
+
+    private Animator _animator;
 
     private StateManager _stateManager;
     private PlayerStatus _playerStatus;
@@ -39,6 +42,8 @@ public class PlayerAutoMove : MonoBehaviour
         _filter.useTriggers = true;
 
         _hits = new Collider2D[MaxHits];
+
+        _animator = GetComponent<Animator>();
     }
 
     public void UpdateAI()
@@ -94,8 +99,12 @@ public class PlayerAutoMove : MonoBehaviour
 
         // 적의 정면으로 이동
         Vector2 targetPosition = _target.position + new Vector3(0, -_attackDistance);
-        Vector2 direction = (targetPosition - (Vector2)transform.position).normalized;
-        transform.Translate(direction * _playerStatus.BaseSpeed * Time.deltaTime);
+        _direction = (targetPosition - (Vector2)transform.position).normalized;
+        transform.Translate(_direction * _playerStatus.BaseSpeed * Time.deltaTime);
+
+        if (_direction.x < 0) _animator.Play("Left");
+        if (_direction.x == 0) _animator.Play("Idle");
+        if (_direction.x > 0) _animator.Play("Right");
     }
 
     public void EvadeFromTarget()
@@ -107,9 +116,13 @@ public class PlayerAutoMove : MonoBehaviour
 
         Vector2 selfPosition = (Vector2)transform.position + new Vector2(widthOffset, 0);
         Vector2 targetPosition = _target.position;
-        Vector2 direction = (selfPosition - targetPosition).normalized;
+        _direction = (selfPosition - targetPosition).normalized;
 
-        transform.Translate(direction * _playerStatus.BaseSpeed * Time.deltaTime);
+        transform.Translate(_direction * _playerStatus.BaseSpeed * Time.deltaTime);
+
+        if (_direction.x < 0) _animator.Play("Left");
+        if (_direction.x == 0) _animator.Play("Idle");
+        if (_direction.x > 0) _animator.Play("Right");
     }
 
     private void OnDrawGizmos()

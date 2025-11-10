@@ -4,10 +4,12 @@ public class PlayerManualMove : MonoBehaviour
 {
     private PlayerStatus _playerStatus;
     private Vector2 _originPosition;
+    private Animator _animator;
 
     private void Awake()
     {
         _playerStatus = GetComponent<PlayerStatus>();
+        _animator = GetComponent<Animator>();
         _originPosition = transform.position;
     }
 
@@ -28,7 +30,11 @@ public class PlayerManualMove : MonoBehaviour
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         Vector2 direction = new Vector2(h, v).normalized;
-        
+
+        if (direction.x < 0) _animator.Play("Left");
+        if (direction.x == 0) _animator.Play("Idle");
+        if (direction.x > 0) _animator.Play("Right");
+
         Vector2 newPosition = (Vector2)transform.position + (direction * finalSpeed) * Time.deltaTime;
         transform.position = newPosition;
     }
