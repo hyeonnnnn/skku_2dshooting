@@ -66,11 +66,7 @@ public abstract class Item : MonoBehaviour
 
     protected void PlayEffect()
     {
-        if(_itemPickupEffect == null)
-        {
-            Debug.Log("_itemPickupEffect");
-            return;
-        }
+        if(_itemPickupEffect == null) return;
 
         Instantiate(_itemPickupEffect, transform.position, Quaternion.identity);
     }

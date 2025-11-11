@@ -26,6 +26,9 @@ public class HealthComponent : MonoBehaviour
         _animator.SetTrigger("Damaged");
         if (_health <= 0)
         {
+            if (_isDead) return;
+            _isDead = true;
+
             PlayEffect();
             Die();
         }
@@ -39,9 +42,6 @@ public class HealthComponent : MonoBehaviour
 
     private void Die()
     {
-        if(_isDead == true) return;
-        _isDead = true;
-
         _itemDrop.TryDropItem(transform.position);
         Destroy(gameObject);
     }
