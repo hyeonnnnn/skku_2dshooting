@@ -3,6 +3,7 @@ using UnityEngine;
 public class MoveTraceComponent : MoveComponent
 {
     private Transform _playerTransform;
+    [SerializeField] private float _rotationOffset = 90f;
 
     private void Awake()
     {
@@ -25,5 +26,13 @@ public class MoveTraceComponent : MoveComponent
         }
             
         transform.Translate(direction * _moveSpeed * Time.deltaTime);
+        LookAtPlayer();
+    }
+
+    private void LookAtPlayer()
+    {
+        Vector2 newPosition = _playerTransform.position - transform.position;
+        float rotationZ = Mathf.Atan2(newPosition.y, newPosition.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0, 0, rotationZ + _rotationOffset);
     }
 }
