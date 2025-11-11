@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class UltimateCollider : MonoBehaviour
 {
-    private float _damage = 10000;
+    [SerializeField] private float _damage = 10000;
+    private const string EnemyTag = "Enemy";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -11,11 +12,12 @@ public class UltimateCollider : MonoBehaviour
 
     private void HitEnemy(GameObject target)
     {
-        if (target.CompareTag("Enemy") == false) return;
+        if (!target.CompareTag(EnemyTag))
+            return;
 
-        HealthComponent health = target.GetComponent<HealthComponent>();
-        
-        if (health == null) return;
-        health.TakeDamage(_damage);
+        if (target.TryGetComponent<HealthComponent>(out var health))
+        {
+            health.TakeDamage(_damage);
+        }
     }
 }

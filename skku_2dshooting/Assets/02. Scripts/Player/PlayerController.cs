@@ -14,6 +14,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _padding = 0.3f;
     private Camera _camera;
 
+    private const KeyCode UseAutoCombatlKey = KeyCode.Alpha1;
+    private const KeyCode UseManaulCombatKey = KeyCode.Alpha2;
+    private const KeyCode UseSkillKey = KeyCode.Alpha3;
+
     private void Awake()
     {
         _camera = Camera.main;
@@ -38,11 +42,11 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchCombatMode()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(UseAutoCombatlKey))
         {
             _isAutoCombatMode = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(UseManaulCombatKey))
         {
             _isAutoCombatMode = false;
         }
@@ -50,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
     private void TryUseSkill()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(UseSkillKey))
         {
             _playerFire.TryUseUltimateSkill();
         }

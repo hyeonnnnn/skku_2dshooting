@@ -12,9 +12,7 @@ public class PlayerFire : MonoBehaviour
     [SerializeField] private Transform _leftSubFirePosition;
     [SerializeField] private Transform _rightSubFirePosition;
 
-    [Header("스킬")]
     private UltimateSkill _ultimateSkill;
-
     private PlayerStatus _playerStatus;
     private float _timer = 0f;
 

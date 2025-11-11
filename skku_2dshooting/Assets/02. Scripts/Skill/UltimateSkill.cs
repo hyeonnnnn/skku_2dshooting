@@ -21,20 +21,32 @@ public class UltimateSkill : MonoBehaviour
     private IEnumerator ActivateUltimateSkill()
     {
         _isUsing = true;
+        try
+        {
+            Vector3 position = transform.position + new Vector3(0, _yDistanceFromPlayer, 0);
 
-        Vector3 position = transform.position + new Vector3(0, _yDistanceFromPlayer, 0);
+            if (_ultimateSkillPrefab == null)
+            {
+                Debug.LogError("_ultimateSkillPrefab이 없습니다.");
+                yield break;
+            }
+            if (_effectPrefab == null)
+            {
+                Debug.LogError("_effectPrefab이 없습니다.");
+                yield break;
+            }
 
-        if (_ultimateSkillPrefab == null ) yield break;
-        if (_effectPrefab == null ) yield break;
+            GameObject ultimateSkillObject = Instantiate(_ultimateSkillPrefab, position, Quaternion.identity);
+            GameObject particleObject = Instantiate(_effectPrefab, position, Quaternion.identity);
 
-        GameObject ultimateSkillObject = Instantiate(_ultimateSkillPrefab, position, Quaternion.identity);
-        GameObject particleObject = Instantiate(_effectPrefab, position, Quaternion.identity);
+            yield return new WaitForSeconds(_duration);
 
-        yield return new WaitForSeconds(_duration);
-
-        Destroy(ultimateSkillObject);
-        Destroy(particleObject);
-
-        _isUsing = false;
+            Destroy(ultimateSkillObject);
+            Destroy(particleObject);
+        }
+        finally
+        {
+            _isUsing = false;
+        }
     }
 }
