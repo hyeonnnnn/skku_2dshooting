@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         SwitchCombatMode();
+        TryUseSkill();
 
         if(_isAutoCombatMode == true)
         {
@@ -44,6 +45,14 @@ public class PlayerController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             _isAutoCombatMode = false;
+        }
+    }
+
+    private void TryUseSkill()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            _playerFire.TryUseUltimateSkill();
         }
     }
 

@@ -19484,7 +19484,7 @@ GameObject:
   - component: {fileID: 6665147307498629104}
   - component: {fileID: 6059007121003406030}
   m_Layer: 0
-  m_Name: EnemyDeathEffectBig
+  m_Name: EnemyDeathBigEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
