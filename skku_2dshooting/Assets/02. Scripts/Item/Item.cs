@@ -14,6 +14,9 @@ public abstract class Item : MonoBehaviour
     [SerializeField] private float _controlPointWidthMin = -2f;
     [SerializeField] private float _controlPointWidthMax = 2f;
 
+    [Header("이펙트")]
+    [SerializeField] private ParticleSystem  _itemPickupEffect;
+
     private Transform _playerTransform;
     private Vector2 _startPoint;
     private Vector2 _controlPoint;
@@ -57,7 +60,19 @@ public abstract class Item : MonoBehaviour
 
     protected void Disappear()
     {
+        PlayEffect();
         Destroy(gameObject);
+    }
+
+    protected void PlayEffect()
+    {
+        if(_itemPickupEffect == null)
+        {
+            Debug.Log("_itemPickupEffect");
+            return;
+        }
+
+        Instantiate(_itemPickupEffect, transform.position, Quaternion.identity);
     }
 
     protected void StartBezierFly()

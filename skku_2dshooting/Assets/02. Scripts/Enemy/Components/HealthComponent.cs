@@ -26,17 +26,21 @@ public class HealthComponent : MonoBehaviour
         _animator.SetTrigger("Damaged");
         if (_health <= 0)
         {
+            PlayEffect();
             Die();
         }
+    }
+
+    private void PlayEffect()
+    {
+        if (_deathEffect == null) return;
+        Instantiate(_deathEffect, transform.position, Quaternion.identity);
     }
 
     private void Die()
     {
         if(_isDead == true) return;
         _isDead = true;
-
-        if (_deathEffect == null) return;
-        Instantiate(_deathEffect, transform.position, Quaternion.identity);
 
         _itemDrop.TryDropItem(transform.position);
         Destroy(gameObject);

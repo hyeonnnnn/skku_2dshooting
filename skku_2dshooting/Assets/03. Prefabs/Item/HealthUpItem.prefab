@@ -118,6 +118,7 @@ MonoBehaviour:
   _controlPointHeightValue: 4
   _controlPointWidthMin: -2
   _controlPointWidthMax: 2
+  _itemPickupEffect: {fileID: 8771972552311404798, guid: bbf9e36a48d6c5648a13889afab076fd, type: 3}
   _healthUpValue: 1
 --- !u!95 &-6451232319403499983
 Animator:
