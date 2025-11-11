@@ -13,6 +13,11 @@ public class BackgroundScroll : MonoBehaviour
 
     private void Update()
     {
+        Move();
+    }
+
+    private void Move()
+    {
         Vector2 direction = Vector2.up;
         _material.mainTextureOffset += direction * _scrollSpeed * Time.deltaTime;
     }
