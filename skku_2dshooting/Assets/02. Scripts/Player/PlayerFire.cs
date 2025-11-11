@@ -47,7 +47,7 @@ public class PlayerFire : MonoBehaviour
 
     public void TryUseUltimateSkill()
     {
-        _ultimateSkill.UseUltimate();
+        _ultimateSkill.UseUltimateSkill();
     }
 
     private void Fire()
