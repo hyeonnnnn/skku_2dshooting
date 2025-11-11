@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 public class PlayerFire : MonoBehaviour
 {
@@ -14,12 +12,14 @@ public class PlayerFire : MonoBehaviour
     [SerializeField] private Transform _leftSubFirePosition;
     [SerializeField] private Transform _rightSubFirePosition;
 
+    private UltimateSkill _ultimateSkill;
     private PlayerStatus _playerStatus;
     private float _timer = 0f;
 
     private void Awake()
     {
         _playerStatus = GetComponent<PlayerStatus>();
+        _ultimateSkill = GetComponent<UltimateSkill>();
     }
 
     public void HandleAutolFire()
@@ -43,6 +43,11 @@ public class PlayerFire : MonoBehaviour
         }
     }
 
+    public void TryUseUltimateSkill()
+    {
+        _ultimateSkill.UseUltimateSkill();
+    }
+
     private void Fire()
     {
         InstantiateBullet(_bulletPrefab, _leftFirePosition);
@@ -50,6 +55,7 @@ public class PlayerFire : MonoBehaviour
         InstantiateBullet(_subBulletPrefab, _leftSubFirePosition);
         InstantiateBullet(_subBulletPrefab, _rightSubFirePosition);
     }
+
 
     private void InstantiateBullet(GameObject prefab, Transform firePosition)
     {
