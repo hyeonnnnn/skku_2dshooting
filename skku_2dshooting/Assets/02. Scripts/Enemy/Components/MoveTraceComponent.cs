@@ -26,10 +26,10 @@ public class MoveTraceComponent : MoveComponent
         }
             
         transform.Translate(direction * _moveSpeed * Time.deltaTime);
-        LooKAtPlayer();
+        LookAtPlayer();
     }
 
-    private void LooKAtPlayer()
+    private void LookAtPlayer()
     {
         Vector2 newPosition = _playerTransform.position - transform.position;
         float rotationZ = Mathf.Atan2(newPosition.y, newPosition.x) * Mathf.Rad2Deg;

@@ -1,5 +1,4 @@
 using UnityEngine;
-using static CartoonFX.CFXR_Effect;
 
 public class HealthComponent : MonoBehaviour
 {

@@ -14,10 +14,10 @@ public class CameraShake : MonoBehaviour
 
     public void Play()
     {
-        StartCoroutine(Shake(_shakeAmount, _shakeTime));
+        StartCoroutine(Shake());
     }
 
-    private IEnumerator Shake(float _shakeAmount, float _shakeTime)
+    private IEnumerator Shake()
     {
         float timer = 0;
         while (timer <= _shakeTime)
