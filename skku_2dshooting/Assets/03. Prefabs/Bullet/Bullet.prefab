@@ -101,10 +101,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ff0a36b63d96e49998617e210ac28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startSpeed: 0.02
-  _endSpeed: 0.03
+  _startSpeed: 0.04
+  _endSpeed: 0.05
   _duration: 0.5
-  Damage: 80
+  Damage: 100
 --- !u!60 &107545403011698931
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -143,7 +143,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.2, y: 0.275}
+    oldSize: {x: 0.33333334, y: 0.45833334}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

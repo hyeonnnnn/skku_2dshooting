@@ -1,4 +1,5 @@
 using UnityEngine;
+using static CartoonFX.CFXR_Effect;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class HealthComponent : MonoBehaviour
 
     private bool _isDead = false;
     private ItemDrop _itemDrop;
+    private CameraShake _cameraShake;
 
     private Animator _animator;
 
@@ -18,6 +20,7 @@ public class HealthComponent : MonoBehaviour
     {
         _itemDrop = GetComponent<ItemDrop>();
         _animator = GetComponent<Animator>();
+        _cameraShake  = Camera.main.GetComponent<CameraShake>();
     }
 
     public void TakeDamage(float damage)
@@ -43,6 +46,7 @@ public class HealthComponent : MonoBehaviour
     private void Die()
     {
         _itemDrop.TryDropItem(transform.position);
+        _cameraShake.Play();
         Destroy(gameObject);
     }
 }
