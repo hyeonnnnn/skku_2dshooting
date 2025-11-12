@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -8,6 +9,9 @@ public class ScoreManager : MonoBehaviour
     private int _currentScore = 0;
     private int _bestScore = 0;
     private const string BestScoreKey = "BestScoreKey";
+
+    private float _textMaxSize = 1.5f;
+    private float _textMinSize = 0.5f;
 
     public int CurrentScore => _currentScore;
 
@@ -36,6 +40,7 @@ public class ScoreManager : MonoBehaviour
     private void UpdateCurrentScoreUI()
     {
         _currentScoreTextUI.text = $"현재 점수: {_currentScore:N0}";
+        TextEffect(_currentScoreTextUI);
     }
 
     private void UpdateBestScore()
@@ -50,10 +55,23 @@ public class ScoreManager : MonoBehaviour
     private void UpdateBestScoreUI()
     {
         _bestScoreTextUI.text = $"최고 점수: {_bestScore:N0}";
+        TextEffect(_bestScoreTextUI);
     }
 
     public void SaveBestScore()
     {
         PlayerPrefs.SetInt(BestScoreKey, _bestScore);
+    }
+
+    private void TextEffect(Text text)
+    {
+        text.transform.DOKill();
+
+        text.transform.DOScale(_textMaxSize, _textMinSize).OnComplete(() =>
+        {
+            if(text == null) return;
+
+            text.transform.DOScale(1f, 1f);
+        });
     }
 }
