@@ -10,8 +10,8 @@ public class ScoreManager : MonoBehaviour
     private int _bestScore = 0;
     private const string BestScoreKey = "BestScoreKey";
 
-    private float _textMaxSize = 1.5f;
-    private float _textMinSize = 0.5f;
+    private float _textEffectScale = 1.5f;
+    private float _textEffectDuration = 0.5f;
 
     public int CurrentScore => _currentScore;
 
@@ -67,7 +67,7 @@ public class ScoreManager : MonoBehaviour
     {
         text.transform.DOKill();
 
-        text.transform.DOScale(_textMaxSize, _textMinSize).OnComplete(() =>
+        text.transform.DOScale(_textEffectScale, _textEffectDuration).OnComplete(() =>
         {
             if(text == null) return;
 

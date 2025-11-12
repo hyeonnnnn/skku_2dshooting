@@ -1,21 +1,22 @@
+using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
+    public static AudioManager instance { get; private set; }
 
-    public enum EBgm
+    public enum Bgm
     {
         BGM_GAME,
     }
 
-    public enum ESfx
+    public enum Sfx
     {
-        SFX_BULLET,
-        SFX_ENEMYEXPLOSION,
-        SFX_ITEMPICKUP,
-        SFX_UlTIMATESKILL,
-        SFX_GAMEOVER,
+        BULLET,
+        ENEMYEXPLOSION,
+        ITEMPICKUP,
+        UITIMATESKILL,
+        GAMEOVER,
     }
 
     [SerializeField] private AudioClip[] bgms;
@@ -37,7 +38,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayBGM(EBgm bgmIndex)
+    public void PlayBGM(Bgm bgmIndex)
     {
         audioBgm.clip = bgms[(int)bgmIndex];
         audioBgm.Play();
@@ -48,9 +49,8 @@ public class AudioManager : MonoBehaviour
         audioBgm.Stop();
     }
 
-    public void PlaySFX(ESfx sfxIndex)
+    public void PlaySFX(Sfx sfxIndex)
     {
         audioSfx.PlayOneShot(sfxs[(int)sfxIndex]);
     }
-
 }

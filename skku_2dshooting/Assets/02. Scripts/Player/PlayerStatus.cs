@@ -70,7 +70,7 @@ public class PlayerStatus : MonoBehaviour
 
     private void Die()
     {
-        AudioManager.instance.PlaySFX(AudioManager.ESfx.SFX_GAMEOVER);
+        AudioManager.instance.PlaySFX(AudioManager.Sfx.GAMEOVER);
         SavePlayerScore();
         Destroy(gameObject);
     }
