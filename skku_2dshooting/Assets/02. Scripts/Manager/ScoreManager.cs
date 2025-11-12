@@ -1,4 +1,3 @@
-using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +7,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private Text _bestScoreTextUI;
     private int _currentScore = 0;
     private int _bestScore = 0;
+    private int _previousScore = -1;
     private const string BestScoreKey = "BestScoreKey";
 
     public int CurrentScore => _currentScore;
@@ -15,8 +15,18 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         LoadBestScore();
-        UpdateCurrentScore();
+        UpdateCurrentScoreUI();
         UpdateBestScore();
+    }
+
+    private void Update()
+    {
+        if (_currentScore != _previousScore)
+        {
+            UpdateCurrentScoreUI();
+            TryUpdateBestScore();
+            _previousScore = _currentScore;
+        }
     }
 
     public void AddScore(int score)
@@ -24,9 +34,6 @@ public class ScoreManager : MonoBehaviour
         if (score <= 0) return;
 
         _currentScore += score;
-
-        UpdateCurrentScore();
-        UpdateBestScore();
     }
 
     private void LoadBestScore()
@@ -34,9 +41,18 @@ public class ScoreManager : MonoBehaviour
         _bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
     }
 
-    private void UpdateCurrentScore()
+    private void UpdateCurrentScoreUI()
     {
         _currentScoreTextUI.text = $"현재 점수: {_currentScore:N0}";
+    }
+
+    private void TryUpdateBestScore()
+    {
+        if (_currentScore > _bestScore)
+        {
+            _bestScore = _currentScore;
+            UpdateBestScore();
+        }
     }
 
     private void UpdateBestScore()
@@ -46,17 +62,15 @@ public class ScoreManager : MonoBehaviour
             _bestScore = _currentScore;
         }
 
+        UpdateBestScoreUI();
+    }
+
+    private void UpdateBestScoreUI()
+    {
         _bestScoreTextUI.text = $"최고 점수: {_bestScore:N0}";
     }
 
-    public void TrySaveBestScore()
-    {
-        if (_currentScore < _bestScore) return;
-
-        SaveBestScore();
-    }
-
-    private void SaveBestScore()
+    public void SaveBestScore()
     {
         PlayerPrefs.SetInt(BestScoreKey, _currentScore);
     }

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -47,7 +46,7 @@ public class PlayerStatus : MonoBehaviour
         StartCoroutine(FlashHitColor());
         if (_currentHealth <= 0)
         {
-            Death();
+            Die();
         }
     }
 
@@ -69,9 +68,9 @@ public class PlayerStatus : MonoBehaviour
         _baseFireCoolTime = Mathf.Max(_baseFireCoolTime, _minFireCoolTime);
     }
 
-    private void Death()
+    private void Die()
     {
-        scoreManager?.TrySaveBestScore();
+        scoreManager?.SaveBestScore();
         Destroy(gameObject);
     }
 

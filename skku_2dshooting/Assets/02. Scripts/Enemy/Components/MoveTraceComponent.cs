@@ -25,10 +25,13 @@ public class MoveTraceComponent : MoveComponent
             direction = (_playerTransform.position - transform.position).normalized;
             LookAtPlayer();
         }
-        
-        // 플레이어가 죽으면 기본 이동
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
         transform.Translate(direction * _moveSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(0, 0, 0);
+        
     }
 
     private void LookAtPlayer()

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -39,7 +38,7 @@ public class HealthComponent : MonoBehaviour
             _isDead = true;
 
             PlayDeathEffect();
-            Death();
+            Die();
         }
     }
 
@@ -49,7 +48,7 @@ public class HealthComponent : MonoBehaviour
         Instantiate(_deathEffect, transform.position, Quaternion.identity);
     }
 
-    private void Death()
+    private void Die()
     {
         _itemDrop.TryDropItem(transform.position);
         _cameraShake.Play();
