@@ -8,11 +8,16 @@ public class HealthComponent : MonoBehaviour
     [Header("이펙트")]
     [SerializeField] private ParticleSystem _deathEffect;
 
+    [Header("점수")]
+    [SerializeField] private int _score;
+
     private bool _isDead = false;
     private ItemDrop _itemDrop;
     private CameraShake _cameraShake;
 
     private Animator _animator;
+
+    private ScoreManager scoreManager;
 
 
     private void Awake()
@@ -20,6 +25,7 @@ public class HealthComponent : MonoBehaviour
         _itemDrop = GetComponent<ItemDrop>();
         _animator = GetComponent<Animator>();
         _cameraShake  = Camera.main.GetComponent<CameraShake>();
+        scoreManager = FindAnyObjectByType<ScoreManager>();
     }
 
     public void TakeDamage(float damage)
@@ -31,12 +37,12 @@ public class HealthComponent : MonoBehaviour
             if (_isDead) return;
             _isDead = true;
 
-            PlayEffect();
+            PlayDeathEffect();
             Die();
         }
     }
 
-    private void PlayEffect()
+    private void PlayDeathEffect()
     {
         if (_deathEffect == null) return;
         Instantiate(_deathEffect, transform.position, Quaternion.identity);
@@ -46,6 +52,9 @@ public class HealthComponent : MonoBehaviour
     {
         _itemDrop.TryDropItem(transform.position);
         _cameraShake.Play();
+
+        scoreManager?.AddScore(_score);
+
         Destroy(gameObject);
     }
 }

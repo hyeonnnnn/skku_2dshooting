@@ -23,10 +23,15 @@ public class MoveTraceComponent : MoveComponent
         if (_playerTransform != null)
         {
             direction = (_playerTransform.position - transform.position).normalized;
+            LookAtPlayer();
         }
-            
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
         transform.Translate(direction * _moveSpeed * Time.deltaTime);
-        LookAtPlayer();
+        
     }
 
     private void LookAtPlayer()
