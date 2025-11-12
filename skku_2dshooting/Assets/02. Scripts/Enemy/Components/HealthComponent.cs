@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -17,12 +18,15 @@ public class HealthComponent : MonoBehaviour
 
     private Animator _animator;
 
+    private ScoreManager scoreManager;
+
 
     private void Awake()
     {
         _itemDrop = GetComponent<ItemDrop>();
         _animator = GetComponent<Animator>();
         _cameraShake  = Camera.main.GetComponent<CameraShake>();
+        scoreManager = FindAnyObjectByType<ScoreManager>();
     }
 
     public void TakeDamage(float damage)
@@ -50,8 +54,7 @@ public class HealthComponent : MonoBehaviour
         _itemDrop.TryDropItem(transform.position);
         _cameraShake.Play();
 
-        ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
-        scoreManager.AddScore(_score);
+        scoreManager?.AddScore(_score);
 
         Destroy(gameObject);
     }

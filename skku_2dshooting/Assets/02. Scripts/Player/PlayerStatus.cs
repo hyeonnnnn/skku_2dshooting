@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -23,12 +24,15 @@ public class PlayerStatus : MonoBehaviour
     private Color _hitFlashColor = Color.red;
     private Color _originalColor;
 
+    private ScoreManager scoreManager;
+
     private void Awake()
     {
         _currentHealth = _maxHealth;
         _currentFireCoolTime = _baseFireCoolTime;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = GetComponent<SpriteRenderer>().color;
+        scoreManager = FindAnyObjectByType<ScoreManager>();
     }
 
     public float CurrentHealth => _currentHealth;
@@ -67,10 +71,8 @@ public class PlayerStatus : MonoBehaviour
 
     private void Death()
     {
+        scoreManager?.TrySaveBestScore();
         Destroy(gameObject);
-
-        ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
-        scoreManager.SaveScore();
     }
 
     private IEnumerator FlashHitColor()

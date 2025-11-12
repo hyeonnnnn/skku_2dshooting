@@ -1,18 +1,22 @@
+using System.Globalization;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private Text _currentScoreTextUI;
+    [SerializeField] private Text _bestScoreTextUI;
     private int _currentScore = 0;
-    private const string ScoreKey = "ScoreKey";
+    private int _bestScore = 0;
+    private const string BestScoreKey = "BestScoreKey";
 
     public int CurrentScore => _currentScore;
 
     private void Start()
     {
-        LoadScore();
-        Refresh();
+        LoadBestScore();
+        UpdateCurrentScore();
+        UpdateBestScore();
     }
 
     public void AddScore(int score)
@@ -21,32 +25,39 @@ public class ScoreManager : MonoBehaviour
 
         _currentScore += score;
 
-        Refresh();
-        SaveScore();
+        UpdateCurrentScore();
+        UpdateBestScore();
     }
 
-    private void Refresh()
+    private void LoadBestScore()
+    {
+        _bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+    }
+
+    private void UpdateCurrentScore()
     {
         _currentScoreTextUI.text = $"현재 점수: {_currentScore:N0}";
     }
 
-    private void Update()
+    private void UpdateBestScore()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha9))
+        if (_currentScore > _bestScore)
         {
-            LoadScore();
+            _bestScore = _currentScore;
         }
+
+        _bestScoreTextUI.text = $"최고 점수: {_bestScore:N0}";
     }
 
-    public void SaveScore()
+    public void TrySaveBestScore()
     {
-        PlayerPrefs.SetInt(ScoreKey, _currentScore);
+        if (_currentScore < _bestScore) return;
+
+        SaveBestScore();
     }
 
-    private void LoadScore()
+    private void SaveBestScore()
     {
-        _currentScore = PlayerPrefs.GetInt(ScoreKey, 0);
-
-        Debug.Log($"score: {_currentScore}");
+        PlayerPrefs.SetInt(BestScoreKey, _currentScore);
     }
 }
