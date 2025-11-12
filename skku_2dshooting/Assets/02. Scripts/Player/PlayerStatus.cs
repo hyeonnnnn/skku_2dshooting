@@ -23,7 +23,7 @@ public class PlayerStatus : MonoBehaviour
     private Color _hitFlashColor = Color.red;
     private Color _originalColor;
 
-    private ScoreManager scoreManager;
+    private ScoreManager _scoreManager;
 
     private void Awake()
     {
@@ -31,7 +31,7 @@ public class PlayerStatus : MonoBehaviour
         _currentFireCoolTime = _baseFireCoolTime;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = GetComponent<SpriteRenderer>().color;
-        scoreManager = FindAnyObjectByType<ScoreManager>();
+        _scoreManager = FindAnyObjectByType<ScoreManager>();
     }
 
     public float CurrentHealth => _currentHealth;
@@ -70,8 +70,13 @@ public class PlayerStatus : MonoBehaviour
 
     private void Die()
     {
-        scoreManager?.SaveBestScore();
+        SavePlayerScore();
         Destroy(gameObject);
+    }
+
+    private void SavePlayerScore()
+    {
+        _scoreManager?.SaveBestScore();
     }
 
     private IEnumerator FlashHitColor()

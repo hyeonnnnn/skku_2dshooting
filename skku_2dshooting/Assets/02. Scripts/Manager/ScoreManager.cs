@@ -7,7 +7,6 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private Text _bestScoreTextUI;
     private int _currentScore = 0;
     private int _bestScore = 0;
-    private int _previousScore = -1;
     private const string BestScoreKey = "BestScoreKey";
 
     public int CurrentScore => _currentScore;
@@ -19,21 +18,14 @@ public class ScoreManager : MonoBehaviour
         UpdateBestScore();
     }
 
-    private void Update()
-    {
-        if (_currentScore != _previousScore)
-        {
-            UpdateCurrentScoreUI();
-            TryUpdateBestScore();
-            _previousScore = _currentScore;
-        }
-    }
-
     public void AddScore(int score)
     {
         if (score <= 0) return;
 
         _currentScore += score;
+
+        UpdateCurrentScoreUI();
+        UpdateBestScore();
     }
 
     private void LoadBestScore()
@@ -46,22 +38,12 @@ public class ScoreManager : MonoBehaviour
         _currentScoreTextUI.text = $"현재 점수: {_currentScore:N0}";
     }
 
-    private void TryUpdateBestScore()
-    {
-        if (_currentScore > _bestScore)
-        {
-            _bestScore = _currentScore;
-            UpdateBestScore();
-        }
-    }
-
     private void UpdateBestScore()
     {
         if (_currentScore > _bestScore)
         {
             _bestScore = _currentScore;
         }
-
         UpdateBestScoreUI();
     }
 
@@ -72,6 +54,6 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveBestScore()
     {
-        PlayerPrefs.SetInt(BestScoreKey, _currentScore);
+        PlayerPrefs.SetInt(BestScoreKey, _bestScore);
     }
 }
