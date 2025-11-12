@@ -14,15 +14,10 @@ public class ScoreManager : MonoBehaviour
     private float _textEffectScale = 1.5f;
     private float _textEffectDuration = 0.2f;
     private float _textEffectReturnDuration = 0.5f;
-
-    private SaveManager _saveManager;
-
     public int CurrentScore => _currentScore;
 
     private void Start()
     {
-        _saveManager = new SaveManager();
-
         InitScore();
     }
 
@@ -45,11 +40,11 @@ public class ScoreManager : MonoBehaviour
 
     private void LoadBestScore()
     {
-        SaveData loaded = _saveManager.Load();
+        SaveData loaded = SaveManager.Load();
 
         if (loaded != null)
         {
-            _bestScore = loaded.score;;
+            _bestScore = loaded.score;
         }
         else
         {
@@ -81,7 +76,7 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveBestScore()
     {
-        _saveManager.Save(_bestScore);
+        SaveManager.Save(_bestScore);
     }
 
     private void TextEffect(Text text)
