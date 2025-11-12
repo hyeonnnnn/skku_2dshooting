@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public abstract class Item : MonoBehaviour
 {
@@ -31,7 +30,7 @@ public abstract class Item : MonoBehaviour
     {
         GameObject player = GameObject.FindWithTag("Player");
 
-        if(player != null)
+        if (player != null)
         {
             _playerTransform = player.transform;
         }
@@ -61,6 +60,7 @@ public abstract class Item : MonoBehaviour
     protected void Disappear()
     {
         PlayEffect();
+        AudioManager.instance.PlaySFX(AudioManager.Sfx.ITEMPICKUP);
         Destroy(gameObject);
     }
 

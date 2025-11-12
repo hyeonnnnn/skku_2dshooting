@@ -50,6 +50,8 @@ public class HealthComponent : MonoBehaviour
 
     private void Die()
     {
+        AudioManager.instance.PlaySFX(AudioManager.Sfx.ENEMYEXPLOSION);
+
         _itemDrop.TryDropItem(transform.position);
         _cameraShake.Play();
 
