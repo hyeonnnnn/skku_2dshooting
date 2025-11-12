@@ -12,6 +12,9 @@ public class PlayerFire : MonoBehaviour
     [SerializeField] private Transform _leftSubFirePosition;
     [SerializeField] private Transform _rightSubFirePosition;
 
+    [Header("사운드")]
+    [SerializeField] private AudioSource _fireSFX;
+
     private UltimateSkill _ultimateSkill;
     private PlayerStatus _playerStatus;
     private float _timer = 0f;
@@ -50,6 +53,8 @@ public class PlayerFire : MonoBehaviour
 
     private void Fire()
     {
+        _fireSFX.Play();
+
         InstantiateBullet(_bulletPrefab, _leftFirePosition);
         InstantiateBullet(_bulletPrefab, _rightFirePosition);
         InstantiateBullet(_subBulletPrefab, _leftSubFirePosition);
