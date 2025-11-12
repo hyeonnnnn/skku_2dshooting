@@ -68,6 +68,9 @@ public class PlayerStatus : MonoBehaviour
     private void Death()
     {
         Destroy(gameObject);
+
+        ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
+        scoreManager.SaveScore();
     }
 
     private IEnumerator FlashHitColor()
