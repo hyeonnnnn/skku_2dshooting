@@ -8,6 +8,9 @@ public class HealthComponent : MonoBehaviour
     [Header("이펙트")]
     [SerializeField] private ParticleSystem _deathEffect;
 
+    [Header("점수")]
+    [SerializeField] private int _score;
+
     private bool _isDead = false;
     private ItemDrop _itemDrop;
     private CameraShake _cameraShake;
@@ -31,21 +34,25 @@ public class HealthComponent : MonoBehaviour
             if (_isDead) return;
             _isDead = true;
 
-            PlayEffect();
-            Die();
+            PlayDeathEffect();
+            Death();
         }
     }
 
-    private void PlayEffect()
+    private void PlayDeathEffect()
     {
         if (_deathEffect == null) return;
         Instantiate(_deathEffect, transform.position, Quaternion.identity);
     }
 
-    private void Die()
+    private void Death()
     {
         _itemDrop.TryDropItem(transform.position);
         _cameraShake.Play();
+
+        ScoreManager scoreManager = FindAnyObjectByType<ScoreManager>();
+        scoreManager.AddScore(_score);
+
         Destroy(gameObject);
     }
 }

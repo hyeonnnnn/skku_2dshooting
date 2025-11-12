@@ -43,7 +43,7 @@ public class PlayerStatus : MonoBehaviour
         StartCoroutine(FlashHitColor());
         if (_currentHealth <= 0)
         {
-            Die();
+            Death();
         }
     }
 
@@ -65,7 +65,7 @@ public class PlayerStatus : MonoBehaviour
         _baseFireCoolTime = Mathf.Max(_baseFireCoolTime, _minFireCoolTime);
     }
 
-    private void Die()
+    private void Death()
     {
         Destroy(gameObject);
     }

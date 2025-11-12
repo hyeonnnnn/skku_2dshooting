@@ -9,6 +9,7 @@ public class EnemyTable : ScriptableObject
     {
         public GameObject EnemyPrefab;
         [Range(0f, 1f)] public float SpawnChance;
+        public int Score;
     }
 
     public EnemyData[] enemys;
