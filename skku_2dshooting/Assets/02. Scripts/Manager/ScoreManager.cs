@@ -4,22 +4,26 @@ using DG.Tweening;
 
 public class ScoreManager : MonoBehaviour
 {
+    [Header("UI 설정")]
     [SerializeField] private Text _currentScoreTextUI;
     [SerializeField] private Text _bestScoreTextUI;
+
     private int _currentScore = 0;
     private int _bestScore = 0;
-    private const string BestScoreKey = "BestScoreKey";
 
     private float _textEffectScale = 1.5f;
-    private float _textEffectDuration = 0.5f;
+    private float _textEffectDuration = 0.2f;
+    private float _textEffectReturnDuration = 0.5f;
+
+    private SaveManager _saveManager;
 
     public int CurrentScore => _currentScore;
 
     private void Start()
     {
-        LoadBestScore();
-        UpdateCurrentScoreUI();
-        UpdateBestScore();
+        _saveManager = new SaveManager();
+
+        InitScore();
     }
 
     public void AddScore(int score)
@@ -32,9 +36,25 @@ public class ScoreManager : MonoBehaviour
         UpdateBestScore();
     }
 
+    private void InitScore()
+    {
+        LoadBestScore();
+        _currentScoreTextUI.text = $"현재 점수: {_currentScore:N0}";
+        _bestScoreTextUI.text = $"최고 점수: {_bestScore:N0}";
+    }
+
     private void LoadBestScore()
     {
-        _bestScore = PlayerPrefs.GetInt(BestScoreKey, 0);
+        SaveData loaded = _saveManager.Load();
+
+        if (loaded != null)
+        {
+            _bestScore = loaded.score;;
+        }
+        else
+        {
+            _bestScore = 0;
+        }
     }
 
     private void UpdateCurrentScoreUI()
@@ -48,8 +68,9 @@ public class ScoreManager : MonoBehaviour
         if (_currentScore > _bestScore)
         {
             _bestScore = _currentScore;
+            SaveBestScore();
+            UpdateBestScoreUI();
         }
-        UpdateBestScoreUI();
     }
 
     private void UpdateBestScoreUI()
@@ -60,18 +81,18 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveBestScore()
     {
-        PlayerPrefs.SetInt(BestScoreKey, _bestScore);
+        _saveManager.Save(_bestScore);
     }
 
     private void TextEffect(Text text)
     {
+        if (text == null) return;
+
         text.transform.DOKill();
 
         text.transform.DOScale(_textEffectScale, _textEffectDuration).OnComplete(() =>
         {
-            if(text == null) return;
-
-            text.transform.DOScale(1f, 1f);
+            text.transform.DOScale(1f, _textEffectReturnDuration);
         });
     }
 }
