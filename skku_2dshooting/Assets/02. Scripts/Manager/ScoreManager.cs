@@ -5,11 +5,13 @@ public class ScoreManager : MonoBehaviour
 {
     [SerializeField] private Text _currentScoreTextUI;
     private int _currentScore = 0;
+    private const string ScoreKey = "ScoreKey";
 
     public int CurrentScore => _currentScore;
 
     private void Start()
     {
+        LoadScore();
         Refresh();
     }
 
@@ -18,13 +20,14 @@ public class ScoreManager : MonoBehaviour
         if (score <= 0) return;
 
         _currentScore += score;
+
         Refresh();
+        SaveScore();
     }
 
     private void Refresh()
     {
-        string formattedScore = string.Format("{0:#,0}", _currentScore);
-        _currentScoreTextUI.text = $"현재 점수: {formattedScore}";
+        _currentScoreTextUI.text = $"현재 점수: {_currentScore:N0}";
     }
 
     private void Update()
@@ -37,17 +40,13 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveScore()
     {
-        PlayerPrefs.SetInt("score", _currentScore);
+        PlayerPrefs.SetInt(ScoreKey, _currentScore);
     }
 
     private void LoadScore()
     {
-        int score = 0;
-        if (PlayerPrefs.HasKey("score"))
-        {
-            score = PlayerPrefs.GetInt("score");
-        }
+        _currentScore = PlayerPrefs.GetInt(ScoreKey, 0);
 
-        Debug.Log($"score: {score}");
+        Debug.Log($"score: {_currentScore}");
     }
 }
