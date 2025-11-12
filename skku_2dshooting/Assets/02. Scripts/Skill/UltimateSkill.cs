@@ -38,6 +38,7 @@ public class UltimateSkill : MonoBehaviour
 
             GameObject ultimateSkillObject = Instantiate(_ultimateSkillPrefab, position, Quaternion.identity);
             GameObject particleObject = Instantiate(_effectPrefab, position, Quaternion.identity);
+            AudioManager.instance.PlaySFX(AudioManager.ESfx.SFX_UlTIMATESKILL);
 
             yield return new WaitForSeconds(_duration);
 
