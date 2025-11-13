@@ -1364,11 +1364,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1079664731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1015191972 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4381635141095447, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
-  m_PrefabInstance: {fileID: 4974126489282706986}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1030273803
 GameObject:
   m_ObjectHideFlags: 0
@@ -2343,36 +2338,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1972924197}
-  - component: {fileID: 1972924196}
+  - component: {fileID: 1972924198}
   m_Layer: 0
-  m_Name: AudioManager
+  m_Name: SoundManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1972924196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1972924195}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e563313b29446734e914f545f326fdda, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bgms:
-  - {fileID: 8300000, guid: 7be2f9e0139635f4b9b84a60129ecc79, type: 3}
-  sfxs:
-  - {fileID: 8300000, guid: 1b7861d1a7a777743959b92d86c5be3c, type: 3}
-  - {fileID: 8300000, guid: 39da210d82d2fc4428c02f6af3516cca, type: 3}
-  - {fileID: 8300000, guid: ec9c751b43f5ef64584c80a23ceb02bb, type: 3}
-  - {fileID: 8300000, guid: a13254c703348cb489a0274715e3617a, type: 3}
-  - {fileID: 8300000, guid: 3db00614233df92458006cc80eeefcc1, type: 3}
-  audioBgm: {fileID: 1030273804}
-  audioSfx: {fileID: 696172131}
 --- !u!4 &1972924197
 Transform:
   m_ObjectHideFlags: 0
@@ -2390,6 +2363,28 @@ Transform:
   - {fileID: 696172132}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1972924198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972924195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 206dcc58d8c550242a618af3b214fc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bgms:
+  - {fileID: 8300000, guid: 7be2f9e0139635f4b9b84a60129ecc79, type: 3}
+  sfxs:
+  - {fileID: 8300000, guid: 1b7861d1a7a777743959b92d86c5be3c, type: 3}
+  - {fileID: 8300000, guid: 39da210d82d2fc4428c02f6af3516cca, type: 3}
+  - {fileID: 8300000, guid: ec9c751b43f5ef64584c80a23ceb02bb, type: 3}
+  - {fileID: 8300000, guid: a13254c703348cb489a0274715e3617a, type: 3}
+  - {fileID: 8300000, guid: 3db00614233df92458006cc80eeefcc1, type: 3}
+  audioBgm: {fileID: 1030273804}
+  audioSfx: {fileID: 696172131}
 --- !u!1 &2015001925
 GameObject:
   m_ObjectHideFlags: 0
@@ -2425,7 +2420,6 @@ MonoBehaviour:
   - {fileID: 8173676451939610758, guid: 45efe2e0774f2e04bb73f5c67d1c9c06, type: 3}
   _bullet: {fileID: 535851271587495735, guid: 19f5fcedca28eb146ac2ae134c902b23, type: 3}
   _fireCoolTime: 4
-  _parent: {fileID: 1015191972}
   _followDelay: 12
 --- !u!4 &2015001927
 Transform:

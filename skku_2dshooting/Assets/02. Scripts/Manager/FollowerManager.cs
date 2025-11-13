@@ -11,13 +11,13 @@ public class FollowerManager : MonoBehaviour
     [SerializeField] private float _fireCoolTime = 4f;
 
     [Header("따라가기")]
-    [SerializeField] private GameObject _parent;
     [SerializeField] private float _followDelay = 12f;
     private float _followSmoothness = 5f;
+    private GameObject _parent;
 
     // 플레이어가 이동한 위치를 순서대로 저장하는 큐
-    private Queue<Vector3> _parentPosition = new Queue<Vector3>(); 
-    
+    private Queue<Vector3> _parentPosition = new Queue<Vector3>();
+
     private List<GameObject> _spawnedFollowers = new List<GameObject>();
 
     private float _timer = 0f;
