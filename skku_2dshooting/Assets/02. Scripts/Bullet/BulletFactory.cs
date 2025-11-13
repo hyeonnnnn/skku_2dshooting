@@ -22,16 +22,16 @@ public class BulletFactory : MonoBehaviour
 
     public GameObject MakeBullet(Vector3 position)
     {
-        return Instantiate(_bulletPrefab, position, Quaternion.identity);
+        return Instantiate(_bulletPrefab, position, Quaternion.identity, transform);
     }
 
     public GameObject MakeSubBullet(Vector3 position)
     {
-        return Instantiate(_subBulletPrefab, position, Quaternion.identity);
+        return Instantiate(_subBulletPrefab, position, Quaternion.identity, transform);
     }
 
     public GameObject MakeFollowerBullet(Vector3 position)
     {
-        return Instantiate(_followerBulletPrefab, position, Quaternion.identity);
+        return Instantiate(_followerBulletPrefab, position, Quaternion.identity, transform);
     }
 }
