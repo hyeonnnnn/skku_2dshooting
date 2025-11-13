@@ -1,10 +1,23 @@
 using UnityEngine;
 
-public static class SaveManager
+public class SaveManager : MonoBehaviour
 {
+    private static SaveManager _instance;
+    public static SaveManager Instance => _instance;
+
     private const string SaveKey = "SaveDataKey";
 
-    public static void Save(int score)
+    private void Awake()
+    {
+        if(_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        _instance = this;
+    }
+
+    public void Save(int score)
     {
         SaveData data = new SaveData();
         data.score = score;
@@ -14,7 +27,7 @@ public static class SaveManager
         PlayerPrefs.Save();
     }
 
-    public static SaveData Load()
+    public SaveData Load()
     {
         if( PlayerPrefs.HasKey(SaveKey))
         {

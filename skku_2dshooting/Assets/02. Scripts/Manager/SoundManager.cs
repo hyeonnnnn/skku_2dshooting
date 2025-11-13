@@ -3,7 +3,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance { get; private set; }
+    private static SoundManager _instance = null;
+    public static SoundManager Instance => _instance;
 
     public enum Bgm
     {
@@ -27,15 +28,12 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
+        if (_instance != null)
         {
             Destroy(gameObject);
+            return;
         }
+        _instance = this;
     }
 
     public void PlayBGM(Bgm bgmIndex)

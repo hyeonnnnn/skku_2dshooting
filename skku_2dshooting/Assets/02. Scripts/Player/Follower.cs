@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class FollowerManager : MonoBehaviour
+public class Follower : MonoBehaviour
 {
     [Header("팔로워들")]
     [SerializeField] private GameObject[] followers;

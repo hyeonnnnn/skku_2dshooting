@@ -70,14 +70,14 @@ public class PlayerStatus : MonoBehaviour
 
     private void Die()
     {
-        SoundManager.instance.PlaySFX(SoundManager.Sfx.GAMEOVER);
+        SoundManager.Instance.PlaySFX(SoundManager.Sfx.GAMEOVER);
         SavePlayerScore();
         Destroy(gameObject);
     }
 
     private void SavePlayerScore()
     {
-        _scoreManager?.SaveBestScore();
+        ScoreManager.Instance.SaveBestScore();
     }
 
     private IEnumerator FlashHitColor()

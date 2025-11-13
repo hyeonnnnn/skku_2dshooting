@@ -4,6 +4,9 @@ using DG.Tweening;
 
 public class ScoreManager : MonoBehaviour
 {
+    private static ScoreManager _instance = null;
+    public static ScoreManager Instance => _instance;
+
     [Header("UI 설정")]
     [SerializeField] private Text _currentScoreTextUI;
     [SerializeField] private Text _bestScoreTextUI;
@@ -15,6 +18,16 @@ public class ScoreManager : MonoBehaviour
     private float _textEffectDuration = 0.2f;
     private float _textEffectReturnDuration = 0.5f;
     public int CurrentScore => _currentScore;
+
+    private void Awake()
+    {
+        if (_instance != null)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        _instance = this;
+    }
 
     private void Start()
     {
@@ -40,7 +53,7 @@ public class ScoreManager : MonoBehaviour
 
     private void LoadBestScore()
     {
-        SaveData loaded = SaveManager.Load();
+        SaveData loaded = SaveManager.Instance.Load();
 
         if (loaded != null)
         {
@@ -76,7 +89,7 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveBestScore()
     {
-        SaveManager.Save(_bestScore);
+        SaveManager.Instance.Save(_bestScore);
     }
 
     private void TextEffect(Text text)
