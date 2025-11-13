@@ -2,10 +2,6 @@ using UnityEngine;
 
 public class PlayerFire : MonoBehaviour
 {
-    [Header("총알 프리팹")]
-    [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private GameObject _subBulletPrefab;
-
     [Header("총구")]
     [SerializeField] private Transform _leftFirePosition;
     [SerializeField] private Transform _rightFirePosition;
@@ -56,11 +52,5 @@ public class PlayerFire : MonoBehaviour
         BulletFactory.Instance.MakeBullet(_rightFirePosition.position);
         BulletFactory.Instance.MakeSubBullet(_leftSubFirePosition.position);
         BulletFactory.Instance.MakeSubBullet(_rightSubFirePosition.position);
-    }
-
-
-    private void InstantiateBullet(GameObject prefab, Transform firePosition)
-    {
-        GameObject bullet = Instantiate(prefab, firePosition.position, Quaternion.identity);
     }
 }

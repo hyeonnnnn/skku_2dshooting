@@ -7,7 +7,6 @@ public class Follower : MonoBehaviour
     [SerializeField] private GameObject[] followers;
 
     [Header("공격")]
-    [SerializeField] private GameObject _bullet;
     [SerializeField] private float _fireCoolTime = 4f;
 
     [Header("따라가기")]
