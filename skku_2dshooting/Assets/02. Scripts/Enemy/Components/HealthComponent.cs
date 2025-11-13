@@ -17,15 +17,12 @@ public class HealthComponent : MonoBehaviour
 
     private Animator _animator;
 
-    private ScoreManager scoreManager;
-
 
     private void Awake()
     {
         _itemDrop = GetComponent<ItemDrop>();
         _animator = GetComponent<Animator>();
         _cameraShake  = Camera.main.GetComponent<CameraShake>();
-        scoreManager = FindAnyObjectByType<ScoreManager>();
     }
 
     public void TakeDamage(float damage)
@@ -55,7 +52,7 @@ public class HealthComponent : MonoBehaviour
         _itemDrop.TryDropItem(transform.position);
         _cameraShake.Play();
 
-        scoreManager?.AddScore(_score);
+        ScoreManager.Instance.AddScore(_score);
 
         Destroy(gameObject);
     }
