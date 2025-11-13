@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class SoundManager : MonoBehaviour
 {
-    public static AudioManager instance { get; private set; }
+    public static SoundManager instance { get; private set; }
 
     public enum Bgm
     {

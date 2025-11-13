@@ -50,7 +50,7 @@ public class PlayerFire : MonoBehaviour
 
     private void Fire()
     {
-        AudioManager.instance.PlaySFX(AudioManager.Sfx.BULLET);
+        SoundManager.instance.PlaySFX(SoundManager.Sfx.BULLET);
 
         InstantiateBullet(_bulletPrefab, _leftFirePosition);
         InstantiateBullet(_bulletPrefab, _rightFirePosition);

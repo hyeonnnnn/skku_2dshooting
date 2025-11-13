@@ -60,7 +60,7 @@ public abstract class Item : MonoBehaviour
     protected void Disappear()
     {
         PlayEffect();
-        AudioManager.instance.PlaySFX(AudioManager.Sfx.ITEMPICKUP);
+        SoundManager.instance.PlaySFX(SoundManager.Sfx.ITEMPICKUP);
         Destroy(gameObject);
     }
 
