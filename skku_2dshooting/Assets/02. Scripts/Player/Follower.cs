@@ -11,12 +11,8 @@ public class Follower : MonoBehaviour
     [SerializeField] private float _fireCoolTime = 4f;
 
     [Header("따라가기")]
-    [SerializeField] private float _followDelay = 12f;
     private float _followSmoothness = 5f;
     private GameObject _parent;
-
-    // 플레이어가 이동한 위치를 순서대로 저장하는 큐
-    private Queue<Vector3> _parentPosition = new Queue<Vector3>();
 
     private List<GameObject> _spawnedFollowers = new List<GameObject>();
 
@@ -36,13 +32,6 @@ public class Follower : MonoBehaviour
 
     private void Update()
     {
-        _parentPosition.Enqueue(_parent.transform.position);
-        // 큐의 크기가 커지는 것 방지
-        if (_parentPosition.Count > _followDelay * _spawnedFollowers.Count)
-        {
-            _parentPosition.Dequeue();
-        }
-
         MoveFollowers();
         Fire();
     }

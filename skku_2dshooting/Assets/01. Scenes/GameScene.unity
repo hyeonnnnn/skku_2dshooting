@@ -1594,7 +1594,6 @@ MonoBehaviour:
   - {fileID: 8173676451939610758, guid: 45efe2e0774f2e04bb73f5c67d1c9c06, type: 3}
   _bullet: {fileID: 535851271587495735, guid: 19f5fcedca28eb146ac2ae134c902b23, type: 3}
   _fireCoolTime: 4
-  _followDelay: 12
 --- !u!1 &1412098136
 GameObject:
   m_ObjectHideFlags: 0
