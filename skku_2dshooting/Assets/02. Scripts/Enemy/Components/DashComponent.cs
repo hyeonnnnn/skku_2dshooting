@@ -20,6 +20,19 @@ public class DashComponent : MonoBehaviour
     {
         _player = GameObject.FindWithTag("Player");
     }
+
+    private void OnEnable()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+        _direction = Vector2.down;
+        _isDashing = false;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
     private void Update()
     {
         DetectPlayer();

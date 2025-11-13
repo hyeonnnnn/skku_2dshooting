@@ -12,15 +12,20 @@ public class Bullet : MonoBehaviour
     [Header("스탯")]
     public float Damage;
 
-    private void Start()
+    private void OnEnable()
     {
-        _currentSpeed = _startSpeed;
-        _acceleration = (_endSpeed - _startSpeed) / _duration;
+        Init();
     }
 
     private void Update()
     {
         Move();
+    }
+
+    private void Init()
+    {
+        _currentSpeed = _startSpeed;
+        _acceleration = (_endSpeed - _startSpeed) / _duration;
     }
 
     private void Move()

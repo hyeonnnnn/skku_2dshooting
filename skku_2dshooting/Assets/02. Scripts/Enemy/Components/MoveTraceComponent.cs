@@ -3,7 +3,9 @@ using UnityEngine;
 public class MoveTraceComponent : MoveComponent
 {
     private Transform _playerTransform;
+    Vector2 direction;
     [SerializeField] private float _rotationOffset = 90f;
+
 
     private void Awake()
     {
@@ -15,10 +17,21 @@ public class MoveTraceComponent : MoveComponent
         }
     }
 
+    private void OnEnable()
+    {
+        Init();
+    }
+
+    private void Init()
+    {
+        direction = Vector2.down;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
     // 플레이어를 따라 이동
     protected override void Move()
     {
-        Vector2 direction = Vector2.down;
+        direction = Vector2.down;
 
         if (_playerTransform != null)
         {

@@ -35,8 +35,7 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogError("스폰할 적 프리팹이 없습니다.");
             return;
         }
-
-        Instantiate(enemyData.EnemyPrefab, transform.position, Quaternion.identity);
+        EnemyFactory.Instance.MakeEnemy(enemyData.EnemyName, transform.position);
     }
 
     private EnemyTable.EnemyData GetRandomEnemyPrefab()

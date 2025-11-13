@@ -23,6 +23,6 @@ public class AttackComponent : MonoBehaviour
 
         player.TakeDamage(_damage);
         Instantiate(_damageEffect, transform.position, Quaternion.identity);
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 }

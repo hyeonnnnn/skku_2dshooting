@@ -37,7 +37,10 @@ public class Follower : MonoBehaviour
 
     private void MoveFollowers()
     {
+        if (_parent == null) return;
+
         Transform target = _parent.transform;
+
         float distance = 0.6f;
 
         foreach (var follower in _spawnedFollowers)

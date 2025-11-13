@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class BulletFactory : MonoBehaviour
 {
-    private static BulletFactory instance;
-    public static BulletFactory Instance => instance;
+    private static BulletFactory _instance;
+    public static BulletFactory Instance => _instance;
 
     [Header("총알 프리팹")]
     [SerializeField] private GameObject _bulletPrefab;
@@ -19,12 +19,12 @@ public class BulletFactory : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null)
+        if (_instance != null)
         {
             Destroy(gameObject);
             return;
         }
-        instance = this;
+        _instance = this;
         PoolInit();
     }
 

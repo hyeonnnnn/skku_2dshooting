@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemys:
   - EnemyPrefab: {fileID: 2433037162075112835, guid: 6b6f985b5bc3637499fede9c93a6d250, type: 3}
+    EnemyName: LinearEnemy
     SpawnChance: 0.4
     Score: 500
   - EnemyPrefab: {fileID: 4451338402280819413, guid: 9ed038365ad580845aee31fff9d975da, type: 3}
+    EnemyName: TraceEnemy
     SpawnChance: 0.4
     Score: 700
   - EnemyPrefab: {fileID: 7329935954921573342, guid: 8fe153d2c95acad4c85bcff4b22d4ad4, type: 3}
+    EnemyName: DashEnemy
     SpawnChance: 0.2
     Score: 1000
