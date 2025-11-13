@@ -44,6 +44,6 @@ public class Bullet : MonoBehaviour
         if (bodyPart == null) return;
         bodyPart.Hit(Damage);
 
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 }
