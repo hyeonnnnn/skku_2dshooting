@@ -67,7 +67,7 @@ public class Follower : MonoBehaviour
         foreach (var follower in _spawnedFollowers)
         {
             if (follower == null) continue;
-            Instantiate(_bullet, follower.transform.position + Vector3.up * offsetY, Quaternion.identity);
+            BulletFactory.Instance.MakeFollowerBullet(follower.transform.position + Vector3.up * offsetY);
         }
 
         _timer = 0;

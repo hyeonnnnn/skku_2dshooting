@@ -18,6 +18,7 @@ public class BulletFactory : MonoBehaviour
     [Header("총알 프리팹")]
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private GameObject _subBulletPrefab;
+    [SerializeField] private GameObject _followerBulletPrefab;
 
     public GameObject MakeBullet(Vector3 position)
     {
@@ -27,5 +28,10 @@ public class BulletFactory : MonoBehaviour
     public GameObject MakeSubBullet(Vector3 position)
     {
         return Instantiate(_subBulletPrefab, position, Quaternion.identity);
+    }
+
+    public GameObject MakeFollowerBullet(Vector3 position)
+    {
+        return Instantiate(_followerBulletPrefab, position, Quaternion.identity);
     }
 }
