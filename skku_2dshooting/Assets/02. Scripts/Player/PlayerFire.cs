@@ -52,10 +52,10 @@ public class PlayerFire : MonoBehaviour
     {
         SoundManager.Instance.PlaySFX(SoundManager.Sfx.BULLET);
 
-        InstantiateBullet(_bulletPrefab, _leftFirePosition);
-        InstantiateBullet(_bulletPrefab, _rightFirePosition);
-        InstantiateBullet(_subBulletPrefab, _leftSubFirePosition);
-        InstantiateBullet(_subBulletPrefab, _rightSubFirePosition);
+        BulletFactory.Instance.MakeBullet(_leftFirePosition.position);
+        BulletFactory.Instance.MakeBullet(_rightFirePosition.position);
+        BulletFactory.Instance.MakeSubBullet(_leftSubFirePosition.position);
+        BulletFactory.Instance.MakeSubBullet(_rightSubFirePosition.position);
     }
 
 
