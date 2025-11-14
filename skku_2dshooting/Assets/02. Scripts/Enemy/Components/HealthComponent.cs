@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class HealthComponent : MonoBehaviour
 {
@@ -12,18 +13,23 @@ public class HealthComponent : MonoBehaviour
     [Header("점수")]
     [SerializeField] private int _score;
 
+    [Header("피격 이펙트")]
+    [SerializeField] private float _hitFlashDuration = 0.1f;
+    [SerializeField] private Color _hitFlashColor = Color.red;
+    private SpriteRenderer _spriteRenderer;
+    private Color _originalColor;
+
     private bool _isDead = false;
     private ItemDrop _itemDrop;
     private CameraShake _cameraShake;
-
-    private Animator _animator;
 
 
     private void Awake()
     {
         _itemDrop = GetComponent<ItemDrop>();
-        _animator = GetComponent<Animator>();
         _cameraShake  = Camera.main.GetComponent<CameraShake>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        _originalColor = GetComponent<SpriteRenderer>().color;
     }
 
     private void OnEnable()
@@ -35,12 +41,13 @@ public class HealthComponent : MonoBehaviour
     {
         _isDead = false;
         _currentHealth = _maxHealth;
+        _spriteRenderer.color = _originalColor;
     }
 
     public void TakeDamage(float damage)
     {
         _currentHealth -= damage;
-        _animator.SetTrigger("Damaged");
+
         if (_currentHealth <= 0)
         {
             if (_isDead) return;
@@ -48,7 +55,9 @@ public class HealthComponent : MonoBehaviour
 
             PlayDeathEffect();
             Die();
+            return;
         }
+        StartCoroutine(FlashHitColor());
     }
 
     private void PlayDeathEffect()
@@ -64,8 +73,14 @@ public class HealthComponent : MonoBehaviour
 
         _itemDrop.TryDropItem(transform.position);
         _cameraShake.Play();
-        _animator.ResetTrigger("Damaged");
 
         gameObject.SetActive(false);
+    }
+
+    private IEnumerator FlashHitColor()
+    {
+        _spriteRenderer.color = _hitFlashColor;
+        yield return new WaitForSeconds(_hitFlashDuration);
+        _spriteRenderer.color = _originalColor;
     }
 }
