@@ -1785,13 +1785,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1473589513}
+  - component: {fileID: 1473589514}
   m_Layer: 0
   m_Name: BossEnemySpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1473589513
 Transform:
   m_ObjectHideFlags: 0
@@ -1808,6 +1809,19 @@ Transform:
   - {fileID: 1782035791}
   m_Father: {fileID: 1079664731}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1473589514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473589512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b35fe6cdafab56d42b6abe7d54be0064, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bossEnemyObject: {fileID: 1782035786}
 --- !u!1 &1585498153
 GameObject:
   m_ObjectHideFlags: 0
@@ -2038,6 +2052,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1782035786 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4533816198089649170, guid: cc3968db25d51ad46bdf853d519eacf8, type: 3}
+  m_PrefabInstance: {fileID: 983374472376863496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1782035791 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4332578366650091542, guid: cc3968db25d51ad46bdf853d519eacf8, type: 3}
@@ -2485,6 +2504,10 @@ PrefabInstance:
     - target: {fileID: 4533816198089649170, guid: cc3968db25d51ad46bdf853d519eacf8, type: 3}
       propertyPath: m_Name
       value: BossEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 4533816198089649170, guid: cc3968db25d51ad46bdf853d519eacf8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

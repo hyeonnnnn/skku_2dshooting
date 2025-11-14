@@ -10,6 +10,7 @@ public class AttackBossComponent : MonoBehaviour
     private static readonly int RUSH = 1;
     private static readonly int FIREBULLET = 2;
     private static readonly int FIRECIRCLEBULLET = 3;
+    private static readonly int END = 3;
 
     private GameObject _player;
 
@@ -19,16 +20,31 @@ public class AttackBossComponent : MonoBehaviour
 
     [Header("공격 이펙트")]
     [SerializeField] private ParticleSystem _damageEffect;
+    [SerializeField] private ParticleSystem _appearEffect;
+
+    private bool isPatternEnd;
+    public bool IsPatternEnd => isPatternEnd;
 
 
     private void Awake()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        
     }
 
     private void OnEnable()
     {
+        Init();
+    }
+
+    private void Init()
+    {
         _nextPatternIndex = 0;
+        if (_appearEffect != null)
+        {
+            Instantiate(_appearEffect, transform.position, Quaternion.identity);
+        }
+            
         NextPatternPlay();
     }
 
@@ -132,7 +148,9 @@ public class AttackBossComponent : MonoBehaviour
                 StartCoroutine(FireBullet());
                 _nextPatternIndex++;
                 break;
-
+            case 3:
+                isPatternEnd = true;
+                break;
         }
     }
 }

@@ -25,7 +25,3 @@ MonoBehaviour:
     EnemyName: DashEnemy
     SpawnChance: 0.2
     Score: 1000
-  - EnemyPrefab: {fileID: 4533816198089649170, guid: cc3968db25d51ad46bdf853d519eacf8, type: 3}
-    EnemyName: BossEnemy
-    SpawnChance: 0
-    Score: 10000

@@ -341,6 +341,7 @@ MonoBehaviour:
   - {fileID: 7439460508335810294}
   - {fileID: 587849193739395807}
   _damageEffect: {fileID: 5880797563141009103, guid: c1afe5d6b71f1954cbbe87ff7f030255, type: 3}
+  _appearEffect: {fileID: 2708598583397607910, guid: 53f8a870f2c59bd449983e2fe646dfbe, type: 3}
 --- !u!1 &4652660651790997029
 GameObject:
   m_ObjectHideFlags: 0
