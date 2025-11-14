@@ -9,6 +9,7 @@ public class HealthComponent : MonoBehaviour
 
     [Header("이펙트")]
     [SerializeField] private ParticleSystem _deathEffect;
+    [SerializeField] private ParticleSystem _damagedEffect;
 
     [Header("점수")]
     [SerializeField] private int _score;
@@ -52,17 +53,23 @@ public class HealthComponent : MonoBehaviour
         {
             if (_isDead) return;
             _isDead = true;
-
             PlayDeathEffect();
             Die();
             return;
         }
+        PlayDamagedEffect();
         StartCoroutine(FlashHitColor());
     }
 
     private void PlayDeathEffect()
     {
         if (_deathEffect == null) return;
+        Instantiate(_deathEffect, transform.position, Quaternion.identity);
+    }
+
+    private void PlayDamagedEffect()
+    {
+        if (_damagedEffect == null) return;
         Instantiate(_deathEffect, transform.position, Quaternion.identity);
     }
 
