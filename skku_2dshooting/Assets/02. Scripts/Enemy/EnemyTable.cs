@@ -8,6 +8,7 @@ public class EnemyTable : ScriptableObject
     public struct EnemyData
     {
         public GameObject EnemyPrefab;
+        public string EnemyName;
         [Range(0f, 1f)] public float SpawnChance;
         public int Score;
     }

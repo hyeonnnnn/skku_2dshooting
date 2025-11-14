@@ -37,7 +37,14 @@ public class Follower : MonoBehaviour
 
     private void MoveFollowers()
     {
+        if (_parent == null)
+        {
+            Die();
+            return;
+        }
+
         Transform target = _parent.transform;
+
         float distance = 0.6f;
 
         foreach (var follower in _spawnedFollowers)
@@ -70,5 +77,10 @@ public class Follower : MonoBehaviour
         }
 
         _timer = 0;
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }

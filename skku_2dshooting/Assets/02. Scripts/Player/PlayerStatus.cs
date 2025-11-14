@@ -18,12 +18,10 @@ public class PlayerStatus : MonoBehaviour
     private float _currentFireCoolTime = 0f;
 
     [Header("피격 이펙트")]
+    [SerializeField] private float _hitFlashDuration = 0.1f;
+    [SerializeField] private Color _hitFlashColor = Color.red;
     private SpriteRenderer _spriteRenderer;
-    private float _hitFlashDuration = 0.1f;
-    private Color _hitFlashColor = Color.red;
     private Color _originalColor;
-
-    private ScoreManager _scoreManager;
 
     private void Awake()
     {
@@ -31,7 +29,6 @@ public class PlayerStatus : MonoBehaviour
         _currentFireCoolTime = _baseFireCoolTime;
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = GetComponent<SpriteRenderer>().color;
-        _scoreManager = FindAnyObjectByType<ScoreManager>();
     }
 
     public float CurrentHealth => _currentHealth;

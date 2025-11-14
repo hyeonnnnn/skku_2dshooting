@@ -12,10 +12,24 @@ public class Bullet : MonoBehaviour
     [Header("스탯")]
     public float Damage;
 
-    private void Start()
+    private TrailRenderer _trailRenderer;
+
+    private void Awake()
+    {
+        _trailRenderer = GetComponent<TrailRenderer>();
+    }
+
+    private void OnEnable()
+    {
+        Init();
+    }
+
+    private void Init()
     {
         _currentSpeed = _startSpeed;
         _acceleration = (_endSpeed - _startSpeed) / _duration;
+        _trailRenderer.Clear();
+
     }
 
     private void Update()
@@ -44,6 +58,6 @@ public class Bullet : MonoBehaviour
         if (bodyPart == null) return;
         bodyPart.Hit(Damage);
 
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 }

@@ -17,6 +17,7 @@ public class BodyPart : MonoBehaviour
     public void Hit(float baseDamage)
     {
         if(_health == null) return;
+        if (_health.gameObject.activeInHierarchy == false) return;
 
         float finalDamage = baseDamage * _damageMultiplier;
         _health.TakeDamage(finalDamage);
