@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BulletFactory : MonoBehaviour
 {
@@ -36,53 +37,30 @@ public class BulletFactory : MonoBehaviour
 
         for (int i = 0; i < _poolSize; i++)
         {
-            GameObject bulletObject = Instantiate(_bulletPrefab, transform);
-            _bulletObjectPool[i] = bulletObject;
-            bulletObject.SetActive(false);
-
-            GameObject subBulletObject = Instantiate(_subBulletPrefab, transform);
-            _subBulletObjectPool[i] = subBulletObject;
-            subBulletObject.SetActive(false);
-
-            GameObject followerBulletObject = Instantiate(_followerBulletPrefab, transform);
-            _followerBulletObjectPool[i] = followerBulletObject;
-            followerBulletObject.SetActive(false);
+            _bulletObjectPool[i] = CreateInactiveInstance(_bulletPrefab);
+            _subBulletObjectPool[i] = CreateInactiveInstance(_subBulletPrefab);
+            _followerBulletObjectPool[i] = CreateInactiveInstance(_followerBulletPrefab);
         }
     }
 
-    public GameObject MakeBullet(Vector3 position)
+    public void MakeBullet(Vector3 position)
     {
-        foreach(var bullet in _bulletObjectPool)
-        {
-            if (bullet.activeInHierarchy == false)
-            {
-                bullet.transform.position = position;
-                bullet.SetActive(true);
-                return bullet;
-            }
-        }
-        Debug.LogError("탄창에 총알 개수가 부족합니다. [정희연을 찾아주세요.]");
-        return null;
+        GetBulletFromPool(_bulletObjectPool, position);
     }
 
-    public GameObject MakeSubBullet(Vector3 position)
+    public void MakeSubBullet(Vector3 position)
     {
-        foreach (var bullet in _subBulletObjectPool)
-        {
-            if (bullet.activeInHierarchy == false)
-            {
-                bullet.transform.position = position;
-                bullet.SetActive(true);
-                return bullet;
-            }
-        }
-        Debug.LogError("탄창에 서브 총알 개수가 부족합니다. [정희연을 찾아주세요.]");
-        return null;
+        GetBulletFromPool(_subBulletObjectPool, position);
     }
 
-    public GameObject MakeFollowerBullet(Vector3 position)
+    public void MakeFollowerBullet(Vector3 position)
     {
-        foreach (var bullet in _followerBulletObjectPool)
+        GetBulletFromPool(_followerBulletObjectPool, position);
+    }
+
+    private GameObject GetBulletFromPool(GameObject[] objectPool, Vector3 position)
+    {
+        foreach (var bullet in objectPool)
         {
             if (bullet.activeInHierarchy == false)
             {
@@ -93,5 +71,12 @@ public class BulletFactory : MonoBehaviour
         }
         Debug.LogError("탄창에 팔로워 총알 개수가 부족합니다. [정희연을 찾아주세요.]");
         return null;
+    }
+
+    private GameObject CreateInactiveInstance(GameObject prefab)
+    {
+        GameObject bulletObject = Instantiate(prefab, transform);
+        bulletObject.SetActive(false);
+        return bulletObject;
     }
 }

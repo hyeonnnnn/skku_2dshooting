@@ -49,7 +49,13 @@ public class EnemyFactory : MonoBehaviour
 
     public GameObject MakeEnemy(string enemyName, Vector3 position)
     {
-        var pool = _enemyPools[enemyName];
+        if(_enemyPools.TryGetValue(enemyName, out var pool) == false)
+        {
+            Debug.LogError($"'{enemyName}'에 해당하는 적 풀이 없습니다.");
+            return null;
+        }
+
+        pool = _enemyPools[enemyName];
         foreach (var enemy in pool)
         {
             if (enemy.activeInHierarchy == false)

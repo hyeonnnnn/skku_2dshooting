@@ -29,7 +29,7 @@ public class HealthComponent : MonoBehaviour
         _itemDrop = GetComponent<ItemDrop>();
         _cameraShake  = Camera.main.GetComponent<CameraShake>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
-        _originalColor = GetComponent<SpriteRenderer>().color;
+        _originalColor = _spriteRenderer.color;
     }
 
     private void OnEnable()
