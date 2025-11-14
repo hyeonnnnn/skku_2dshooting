@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossEnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _bossEnemyObject;
-    private AttackBossComponent _attackBossComponent;
+    private BossPatternController _attackBossComponent;
 
     private int _spawnScore = 20000;
     private int _nextSpawnScore;
@@ -12,14 +12,13 @@ public class BossEnemySpawner : MonoBehaviour
     {
         _nextSpawnScore = _spawnScore;
         _bossEnemyObject.SetActive(false);
-        _attackBossComponent = _bossEnemyObject.GetComponent<AttackBossComponent>();
+        _attackBossComponent = _bossEnemyObject.GetComponent<BossPatternController>();
 
     }
 
     private void Update()
     {
         CheckScore();
-        CheckIsPatternEnd();
     }
 
     private void CheckScore()
@@ -37,14 +36,6 @@ public class BossEnemySpawner : MonoBehaviour
     private void SpawnBossEnemy()
     {
         _bossEnemyObject.SetActive(true);
-    }
-
-    private void CheckIsPatternEnd()
-    {
-        if (_attackBossComponent.IsPatternEnd == true)
-        {
-            EndBossEnemy();
-        }
     }
 
     public void EndBossEnemy()
