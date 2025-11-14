@@ -37,7 +37,11 @@ public class Follower : MonoBehaviour
 
     private void MoveFollowers()
     {
-        if (_parent == null) return;
+        if (_parent == null)
+        {
+            Die();
+            return;
+        }
 
         Transform target = _parent.transform;
 
@@ -73,5 +77,10 @@ public class Follower : MonoBehaviour
         }
 
         _timer = 0;
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
     }
 }

@@ -2628,25 +2628,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1852756296113496248, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
-      propertyPath: m_Enabled
+    - target: {fileID: 1948081806434380437, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183981393181164309, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_MinVertexDistance
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183981393181164309, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1de66e5f4e86e2e4cb564890916f7a9c, type: 2}
+    - target: {fileID: 2183981393181164309, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.numCapVertices
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183981393181164309, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.numCornerVertices
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183981393181164309, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime1
+      value: 6361
+      objectReference: {fileID: 0}
+    - target: {fileID: 2183981393181164309, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2869865116958923135, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
-      propertyPath: _hitFlashColor.b
-      value: 0.47058824
+    - target: {fileID: 2183981393181164309, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.08219528
       objectReference: {fileID: 0}
-    - target: {fileID: 2869865116958923135, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
-      propertyPath: _hitFlashColor.g
-      value: 0.47058824
-      objectReference: {fileID: 0}
-    - target: {fileID: 2869865116958923135, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
-      propertyPath: _hitFlashColor.r
-      value: 0.8901961
+    - target: {fileID: 4236145456389000062, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.38
       objectReference: {fileID: 0}
     - target: {fileID: 4654305094741623180, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802960937294633246, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_MinVertexDistance
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802960937294633246, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 1de66e5f4e86e2e4cb564890916f7a9c, type: 2}
+    - target: {fileID: 4802960937294633246, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.numCapVertices
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802960937294633246, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.numCornerVertices
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802960937294633246, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.colorGradient.atime1
+      value: 6361
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802960937294633246, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802960937294633246, guid: 393a59713a6bb9f4e8b170dff97e95f0, type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 0.08219528
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
