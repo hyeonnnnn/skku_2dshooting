@@ -39,6 +39,7 @@ public class AttackBossComponent : MonoBehaviour
 
     private void Init()
     {
+        isPatternEnd = false;
         _nextPatternIndex = 0;
         if (_appearEffect != null)
         {

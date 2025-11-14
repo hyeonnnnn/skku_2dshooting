@@ -28,6 +28,7 @@ public class BossEnemySpawner : MonoBehaviour
 
         if (currentScore >= _nextSpawnScore)
         {
+            Debug.Log("보스 소환");
             SpawnBossEnemy();
             _nextSpawnScore += _spawnScore;
         }
