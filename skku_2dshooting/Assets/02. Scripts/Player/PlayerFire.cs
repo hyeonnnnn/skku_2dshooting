@@ -21,9 +21,6 @@ public class PlayerFire : MonoBehaviour
     public void HandleAutolFire()
     {
         _timer += Time.deltaTime;
-        if (_timer < _playerStatus.CurrentFireCoolTime) return;
-
-        _timer = 0f;
         Fire();
     }
 
@@ -44,13 +41,17 @@ public class PlayerFire : MonoBehaviour
         _ultimateSkill.UseUltimateSkill();
     }
 
-    private void Fire()
+    public void Fire()
     {
+        if (_timer < _playerStatus.CurrentFireCoolTime) return;
+
         SoundManager.Instance.PlaySFX(SoundManager.Sfx.BULLET);
 
         BulletFactory.Instance.MakeBullet(_leftFirePosition.position);
         BulletFactory.Instance.MakeBullet(_rightFirePosition.position);
         BulletFactory.Instance.MakeSubBullet(_leftSubFirePosition.position);
         BulletFactory.Instance.MakeSubBullet(_rightSubFirePosition.position);
+
+        _timer = 0f;
     }
 }
