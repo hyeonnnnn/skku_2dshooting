@@ -82,11 +82,17 @@ public class PlayerController : MonoBehaviour
     {
         if (_camera == null) return;
 
-        Vector3 min = _camera.ViewportToWorldPoint(new Vector3(0, 0, transform.position.z - _camera.transform.position.z));
-        Vector3 max = _camera.ViewportToWorldPoint(new Vector3(1, 1, transform.position.z - _camera.transform.position.z));
+        float distance = transform.position.z - _camera.transform.position.z;
+        float _maxViewportY = 0.6f;
 
-        float clampedX = Mathf.Clamp(transform.position.x, min.x + _padding, max.x - _padding);
-        float clampedY = Mathf.Clamp(transform.position.y, min.y + _padding, max.y - _padding);
+        Vector3 minX = _camera.ViewportToWorldPoint(new Vector3(0f, 0f, distance));
+        Vector3 maxX = _camera.ViewportToWorldPoint(new Vector3(1f, 1f, distance));
+
+        Vector3 minY = _camera.ViewportToWorldPoint(new Vector3(0f, 0f, distance));
+        Vector3 maxY = _camera.ViewportToWorldPoint(new Vector3(0f, _maxViewportY, distance));
+
+        float clampedX = Mathf.Clamp(transform.position.x, minX.x + _padding, maxX.x - _padding);
+        float clampedY = Mathf.Clamp(transform.position.y, minY.y + _padding, maxY.y - _padding);
 
         transform.position = new Vector3(clampedX, clampedY, transform.position.z);
     }

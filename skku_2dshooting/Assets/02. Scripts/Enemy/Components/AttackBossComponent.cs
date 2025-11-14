@@ -101,7 +101,6 @@ public class AttackBossComponent : MonoBehaviour
         {
             foreach (var firePosition in _firePositions)
             {
-                Debug.Log("총 발사");
                 BulletFactory.Instance.MakeBossBullet(firePosition.position);
 
             }
