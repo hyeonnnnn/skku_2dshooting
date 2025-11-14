@@ -8,14 +8,18 @@ public class AttackBossComponent : MonoBehaviour
 
     private static readonly int IDLE = 0;
     private static readonly int RUSH = 1;
-    private static readonly int FIREBALLBULLET = 2;
+    private static readonly int FIREBULLET = 2;
     private static readonly int FIRECIRCLEBULLET = 3;
 
     private GameObject _player;
 
-    [Header("공격 설정")]
+    [Header("공격 설정값")]
     [SerializeField] private float _damage = 2;
+    [SerializeField] private Transform[] _firePositions;
+
+    [Header("공격 이펙트")]
     [SerializeField] private ParticleSystem _damageEffect;
+
 
     private void Awake()
     {
@@ -66,6 +70,7 @@ public class AttackBossComponent : MonoBehaviour
         }
 
         yield return new WaitForSeconds(2f);
+        NextPatternPlay();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -84,6 +89,34 @@ public class AttackBossComponent : MonoBehaviour
         Instantiate(_damageEffect, transform.position, Quaternion.identity);
     }
 
+    private IEnumerator FireBullet()
+    {
+        Debug.Log("FireBullet 시작");
+
+        float timer = 0f;
+        float coolTime = 1.5f;
+        int attackCount = 5;
+
+        for (int i = 0; i < attackCount; i++)
+        {
+            foreach (var firePosition in _firePositions)
+            {
+                Debug.Log("총 발사");
+                BulletFactory.Instance.MakeBossBullet(firePosition.position);
+
+            }
+            timer = 0;
+            while (timer < coolTime)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+        }
+        
+        yield return new WaitForSeconds(2f);
+        NextPatternPlay();
+    }
+
     private void NextPatternPlay()
     {
         switch (_nextPatternIndex)
@@ -94,6 +127,10 @@ public class AttackBossComponent : MonoBehaviour
                 break;
             case 1:
                 StartCoroutine(Rush());
+                _nextPatternIndex++;
+                break;
+            case 2:
+                StartCoroutine(FireBullet());
                 _nextPatternIndex++;
                 break;
 

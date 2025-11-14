@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class EnemyBullet : MonoBehaviour
 {
     [Header("이동 속도")]
     [SerializeField] private float _startSpeed = 0.02f;
@@ -12,13 +12,6 @@ public class Bullet : MonoBehaviour
     [Header("스탯")]
     [SerializeField] private float _damage;
 
-    private TrailRenderer _trailRenderer;
-
-    private void Awake()
-    {
-        _trailRenderer = GetComponent<TrailRenderer>();
-    }
-
     private void OnEnable()
     {
         Init();
@@ -28,7 +21,6 @@ public class Bullet : MonoBehaviour
     {
         _currentSpeed = _startSpeed;
         _acceleration = (_endSpeed - _startSpeed) / _duration;
-        _trailRenderer.Clear();
 
     }
 
@@ -47,17 +39,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Enemy") == false) return;
+        if (collision.CompareTag("Player") == false) return;
 
-        HandleCollision(collision);
-    }
+        PlayerStatus player = collision.GetComponent<PlayerStatus>();
+        if (player == null) return;
 
-    private void HandleCollision(Collider2D collision)
-    {
-        BodyPart bodyPart = collision.GetComponent<BodyPart>();
-        if (bodyPart == null) return;
-        bodyPart.Hit(_damage);
-
-        gameObject.SetActive(false);
+        player.TakeDamage(_damage);
     }
 }

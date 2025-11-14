@@ -11,12 +11,16 @@ public class BulletFactory : MonoBehaviour
     [SerializeField] private GameObject _bulletPrefab;
     [SerializeField] private GameObject _subBulletPrefab;
     [SerializeField] private GameObject _followerBulletPrefab;
+    [SerializeField] private GameObject _bossBulletPrefab;
 
     [Header("풀링")]
     [SerializeField] private int _poolSize = 30;
     private GameObject[] _bulletObjectPool;
     private GameObject[] _subBulletObjectPool;
     private GameObject[] _followerBulletObjectPool;
+
+    [SerializeField] private int _bossPoolSize = 100;
+    private GameObject[] _bossBulletObjectPool;
 
     private void Awake()
     {
@@ -34,12 +38,14 @@ public class BulletFactory : MonoBehaviour
         _bulletObjectPool = new GameObject[_poolSize];
         _subBulletObjectPool = new GameObject[_poolSize];
         _followerBulletObjectPool = new GameObject[_poolSize];
+        _bossBulletObjectPool = new GameObject[_bossPoolSize];
 
         for (int i = 0; i < _poolSize; i++)
         {
             _bulletObjectPool[i] = CreateInactiveInstance(_bulletPrefab);
             _subBulletObjectPool[i] = CreateInactiveInstance(_subBulletPrefab);
             _followerBulletObjectPool[i] = CreateInactiveInstance(_followerBulletPrefab);
+            _bossBulletObjectPool[i] = CreateInactiveInstance(_bossBulletPrefab);
         }
     }
 
@@ -56,6 +62,11 @@ public class BulletFactory : MonoBehaviour
     public void MakeFollowerBullet(Vector3 position)
     {
         GetBulletFromPool(_followerBulletObjectPool, position);
+    }
+
+    public void MakeBossBullet(Vector3 position)
+    {
+        GetBulletFromPool(_bossBulletObjectPool, position);
     }
 
     private GameObject GetBulletFromPool(GameObject[] objectPool, Vector3 position)
