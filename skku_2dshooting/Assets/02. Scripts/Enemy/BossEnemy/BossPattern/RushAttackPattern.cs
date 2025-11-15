@@ -7,7 +7,6 @@ public class RushAttackPattern : BossPatternBase
 
     public override IEnumerator Execute()
     {
-        Debug.Log("러쉬 공격 패턴 시작");
         yield return _boss.StartCoroutine(_boss.RushAttack());
     }
 }

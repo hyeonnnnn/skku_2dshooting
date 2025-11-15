@@ -45,5 +45,6 @@ public class EnemyBullet : MonoBehaviour
         if (player == null) return;
 
         player.TakeDamage(_damage);
+        gameObject.SetActive(false);
     }
 }

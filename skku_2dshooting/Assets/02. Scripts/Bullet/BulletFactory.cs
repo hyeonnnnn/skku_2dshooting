@@ -19,7 +19,7 @@ public class BulletFactory : MonoBehaviour
     private GameObject[] _subBulletObjectPool;
     private GameObject[] _followerBulletObjectPool;
 
-    [SerializeField] private int _bossPoolSize = 100;
+    [SerializeField] private int _bossPoolSize = 300;
     private GameObject[] _bossBulletObjectPool;
 
     private void Awake()
@@ -45,6 +45,10 @@ public class BulletFactory : MonoBehaviour
             _bulletObjectPool[i] = CreateInactiveInstance(_bulletPrefab);
             _subBulletObjectPool[i] = CreateInactiveInstance(_subBulletPrefab);
             _followerBulletObjectPool[i] = CreateInactiveInstance(_followerBulletPrefab);
+        }
+
+        for (int i = 0; i < _bossPoolSize; i++)
+        {
             _bossBulletObjectPool[i] = CreateInactiveInstance(_bossBulletPrefab);
         }
     }
@@ -80,7 +84,7 @@ public class BulletFactory : MonoBehaviour
                 return bullet;
             }
         }
-        Debug.LogError("탄창에 팔로워 총알 개수가 부족합니다. [정희연을 찾아주세요.]");
+        Debug.LogError("탄창에 총알 개수가 부족합니다. [정희연을 찾아주세요.]");
         return null;
     }
 

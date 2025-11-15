@@ -4,7 +4,7 @@ public class BossEnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject _bossEnemyObject;
 
-    private int _spawnScore = 20000;
+    private int _spawnScore = 25000;
     private int _nextSpawnScore;
 
     private void Awake()

@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BossPatternController
 {
-    private Boss _boss;
-    private List<BossPatternBase> _patterns = new List<BossPatternBase>();
+    private readonly Boss _boss;
+    private readonly List<BossPatternBase> _patterns = new List<BossPatternBase>();
+    private float _term = 2f;
     
     public BossPatternController(Boss boss)
     {
@@ -13,7 +14,7 @@ public class BossPatternController
 
         _patterns.Add(new NormalAttackPattern(_boss));
         _patterns.Add(new RushAttackPattern(_boss));
-        _patterns.Add(new CircleAttackPattern(_boss));
+        _patterns.Add(new SequenceAttackPattern(_boss));
     }
 
     public IEnumerator StartPattern()
@@ -22,6 +23,7 @@ public class BossPatternController
         {
             foreach (var pattern in _patterns)
             {
+                yield return new WaitForSeconds(_term);
                 yield return _boss.StartCoroutine(pattern.Execute());
             }
         }

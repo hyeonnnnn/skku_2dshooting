@@ -167,5 +167,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _startSpeed: 0.02
   _endSpeed: 0.03
-  _duration: 0.5
-  _damage: 2
+  _duration: 0.2
+  _damage: 1

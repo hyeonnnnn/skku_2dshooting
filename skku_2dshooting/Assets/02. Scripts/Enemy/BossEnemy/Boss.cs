@@ -1,23 +1,20 @@
 using System.Collections;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Boss : MonoBehaviour
 {
     private BossPatternController _bossPatternController;
 
-    [Header("공격 설정값")]
-    [SerializeField] private float _damage = 2f;
+    [Header("총구")]
     [SerializeField] private Transform[] _firePositions;
 
-    [Header("공격 이펙트")]
+    [Header("이펙트")]
     [SerializeField] private ParticleSystem _damageEffect;
     [SerializeField] private ParticleSystem _appearEffect;
+    [SerializeField] private ParticleSystem _disappearEffect;
 
-    Vector3 _originPosition;
-    Vector3 _targetPosition;
+    private Vector3 _originPosition;
+    private Vector3 _targetPosition;
 
     private void Awake()
     {
@@ -36,7 +33,37 @@ public class Boss : MonoBehaviour
     private void Init()
     {
         transform.position = _originPosition;
+        Instantiate(_appearEffect, transform.position, Quaternion.identity);
+
+
         StartCoroutine(_bossPatternController.StartPattern());
+    }
+
+    private void OnDisable()
+    {
+        Instantiate(_disappearEffect, transform.position, Quaternion.identity);
+    }
+
+    public IEnumerator NormalAttack()
+    {
+        float coolTime = 1.5f;
+        int attackCount = 5;
+        float timer = 0f;
+
+        for (int i = 0; i < attackCount; i++)
+        {
+            foreach (var firePosition in _firePositions)
+            {
+                BulletFactory.Instance.MakeBossBullet(firePosition.position);
+
+            }
+            timer = 0;
+            while (timer < coolTime)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+        }
     }
 
     public IEnumerator RushAttack()
@@ -60,6 +87,24 @@ public class Boss : MonoBehaviour
             transform.position = Vector3.MoveTowards( transform.position, _originPosition, speed * Time.deltaTime);
             timer += Time.deltaTime;
             yield return null;
+        }
+    }
+
+    public IEnumerator SequenceAttack()
+    {
+        float duration = 0.3f;
+        float term = 0.1f;
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            foreach (var firePosition in _firePositions)
+            {
+                BulletFactory.Instance.MakeBossBullet(firePosition.position);
+                timer += Time.deltaTime;
+                yield return new WaitForSeconds(term);
+            }
+            
         }
     }
 
