@@ -2837,14 +2837,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 522754923}
     m_Modifications:
-    - target: {fileID: 30775207050891052, guid: c4f5c97c5b91d854297dc51ace6164d9, type: 3}
-      propertyPath: _maxHealth
-      value: 99999
-      objectReference: {fileID: 0}
-    - target: {fileID: 30775207050891052, guid: c4f5c97c5b91d854297dc51ace6164d9, type: 3}
-      propertyPath: _damageEffect
-      value: 
-      objectReference: {fileID: 3663718601813231946, guid: 5c6e8adb300cc1a4a92eae084e76742c, type: 3}
     - target: {fileID: 3148936240648911084, guid: c4f5c97c5b91d854297dc51ace6164d9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

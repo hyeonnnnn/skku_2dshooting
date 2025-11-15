@@ -10,12 +10,11 @@ public class Boss : MonoBehaviour
 
     [Header("이펙트")]
     [SerializeField] private ParticleSystem _damageEffect;
-    
-
-    public event System.Action OnPatternEnd;
 
     private Vector3 _originPosition;
     private Vector3 _targetPosition;
+
+    public event System.Action OnPatternEnd;
 
     private void Awake()
     {

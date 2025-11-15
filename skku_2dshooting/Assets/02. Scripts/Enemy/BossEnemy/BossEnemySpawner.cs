@@ -23,9 +23,9 @@ public class BossEnemySpawner : MonoBehaviour
         _bossEnemyObject.SetActive(false);
     }
 
-    private void Update()
+    private void Start()
     {
-        CheckScore();
+        ScoreManager.Instance.OnScoreReached += CheckScore;
     }
 
     private void CheckScore()
