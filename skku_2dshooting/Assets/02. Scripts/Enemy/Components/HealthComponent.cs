@@ -23,6 +23,7 @@ public class HealthComponent : MonoBehaviour
     private bool _isDead = false;
     private ItemDrop _itemDrop;
     private CameraShake _cameraShake;
+    private Boss _boss;
 
 
     private void Awake()
@@ -31,6 +32,7 @@ public class HealthComponent : MonoBehaviour
         _cameraShake  = Camera.main.GetComponent<CameraShake>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
+        _boss = GetComponent<Boss>();
     }
 
     private void OnEnable()
@@ -81,7 +83,7 @@ public class HealthComponent : MonoBehaviour
         ScoreManager.Instance.AddScore(_score);
         _cameraShake.Play();
 
-        if (GetComponent<Boss>() == null)
+        if (_boss == null)
         {
             _itemDrop.TryDropItem(transform.position);
             gameObject.SetActive(false);

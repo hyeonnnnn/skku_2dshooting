@@ -43,10 +43,15 @@ public class BulletFactory : MonoBehaviour
         for (int i = 0; i < _poolSize; i++)
         {
             _bulletObjectPool[i] = CreateInactiveInstance(_bulletPrefab);
+        }
+        for (int i = 0; i < _poolSize; i++)
+        {
             _subBulletObjectPool[i] = CreateInactiveInstance(_subBulletPrefab);
+        }
+        for (int i = 0; i < _poolSize; i++)
+        {
             _followerBulletObjectPool[i] = CreateInactiveInstance(_followerBulletPrefab);
         }
-
         for (int i = 0; i < _bossPoolSize; i++)
         {
             _bossBulletObjectPool[i] = CreateInactiveInstance(_bossBulletPrefab);

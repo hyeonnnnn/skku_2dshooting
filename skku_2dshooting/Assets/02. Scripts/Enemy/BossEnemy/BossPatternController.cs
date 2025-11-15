@@ -25,6 +25,6 @@ public class BossPatternController
             yield return _boss.StartCoroutine(pattern.Execute());
         }
 
-        _boss.NotifyPatternEnd(); //  보스야 패턴 끝났어
+        _boss.NotifyPatternEnd();
     }
 }

@@ -12,6 +12,8 @@ public class BossEnemySpawner : MonoBehaviour
     private int _spawnScore = 20000;
     private int _nextSpawnScore;
 
+    private Boss boss;
+
     private void Awake()
     {
         Init();
@@ -19,6 +21,7 @@ public class BossEnemySpawner : MonoBehaviour
 
     private void Init()
     {
+        boss = _bossEnemyObject.GetComponent<Boss>();
         _nextSpawnScore = _spawnScore;
         _bossEnemyObject.SetActive(false);
     }
@@ -44,7 +47,6 @@ public class BossEnemySpawner : MonoBehaviour
         _bossEnemyObject.SetActive(true);
         Instantiate(_appearEffect, transform.position, Quaternion.identity);
 
-        Boss boss = _bossEnemyObject.GetComponent<Boss>();
         boss.OnPatternEnd += DespawnBossEnemy;
     }
 
@@ -52,5 +54,7 @@ public class BossEnemySpawner : MonoBehaviour
     {
         _bossEnemyObject.SetActive(false);
         Instantiate(_disappearEffect, transform.position, Quaternion.identity);
+
+        boss.OnPatternEnd -= DespawnBossEnemy;
     }
 }

@@ -1,7 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
-using static UnityEngine.UI.Image;
 
 public class Boss : MonoBehaviour
 {
@@ -14,15 +12,14 @@ public class Boss : MonoBehaviour
     [SerializeField] private ParticleSystem _damageEffect;
 
     private Vector3 _originPosition;
-    private Vector3 _targetPosition;
+    private Transform _player;
 
     public event System.Action OnPatternEnd;
 
     private void Awake()
     {
-        // 넌 날 모르니깐 나를 알려줄게
         _bossPatternController = new BossPatternController(this);
-
+        _player = GameObject.FindWithTag("Player").transform;
         _originPosition = transform.position;
         
     }
@@ -66,11 +63,9 @@ public class Boss : MonoBehaviour
         float duration = 1.5f;
         float timer = 0f;
 
-        _targetPosition = GameObject.FindWithTag("Player").transform.position;
-
         while (timer < duration)
         {
-            transform.position = Vector3.MoveTowards( transform.position, _targetPosition, speed * Time.deltaTime );
+            transform.position = Vector3.MoveTowards( transform.position, _player.position, speed * Time.deltaTime );
             
             timer += Time.deltaTime;
             yield return null;
@@ -90,14 +85,12 @@ public class Boss : MonoBehaviour
     {
         int attackCount = 5;
         float term = 0.1f;
-        float timer = 0f;
 
         for (int i = 0; i < attackCount; i++)
         {
             foreach (var firePosition in _firePositions)
             {
                 BulletFactory.Instance.MakeBossBullet(firePosition.position);
-                timer += Time.deltaTime;
                 yield return new WaitForSeconds(term);
             }
         }
