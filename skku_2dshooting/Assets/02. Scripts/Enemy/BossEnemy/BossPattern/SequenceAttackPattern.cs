@@ -7,7 +7,6 @@ public class SequenceAttackPattern : BossPatternBase
 
     public override IEnumerator Execute()
     {
-        Debug.Log("지그재그 공격 패턴 시작");
         yield return _boss.StartCoroutine(_boss.SequenceAttack());
     }
 }

@@ -7,7 +7,7 @@ public class BossPatternController
     private readonly Boss _boss;
     private readonly List<BossPatternBase> _patterns = new List<BossPatternBase>();
     private float _term = 2f;
-    
+
     public BossPatternController(Boss boss)
     {
         _boss = boss;
@@ -19,13 +19,13 @@ public class BossPatternController
 
     public IEnumerator StartPattern()
     {
-        while (true)
+        foreach (var pattern in _patterns)
         {
-            foreach (var pattern in _patterns)
-            {
-                yield return new WaitForSeconds(_term);
-                yield return _boss.StartCoroutine(pattern.Execute());
-            }
+            yield return new WaitForSeconds(_term);
+            yield return _boss.StartCoroutine(pattern.Execute());
         }
+
+        _boss.NotifyPatternEnd(); //  보스야 나 끝났어
+        Debug.Log("보스야 나 끝났어");
     }
 }

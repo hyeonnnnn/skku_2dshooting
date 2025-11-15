@@ -10,8 +10,9 @@ public class Boss : MonoBehaviour
 
     [Header("이펙트")]
     [SerializeField] private ParticleSystem _damageEffect;
-    [SerializeField] private ParticleSystem _appearEffect;
-    [SerializeField] private ParticleSystem _disappearEffect;
+    
+
+    public event System.Action OnPatternEnd;
 
     private Vector3 _originPosition;
     private Vector3 _targetPosition;
@@ -33,22 +34,14 @@ public class Boss : MonoBehaviour
     private void Init()
     {
         transform.position = _originPosition;
-        Instantiate(_appearEffect, transform.position, Quaternion.identity);
-
-
         StartCoroutine(_bossPatternController.StartPattern());
-    }
-
-    private void OnDisable()
-    {
-        Instantiate(_disappearEffect, transform.position, Quaternion.identity);
     }
 
     public IEnumerator NormalAttack()
     {
         float coolTime = 1.5f;
-        int attackCount = 5;
         float timer = 0f;
+        int attackCount = 5;
 
         for (int i = 0; i < attackCount; i++)
         {
@@ -92,11 +85,11 @@ public class Boss : MonoBehaviour
 
     public IEnumerator SequenceAttack()
     {
-        float duration = 0.3f;
+        int attackCount = 5;
         float term = 0.1f;
         float timer = 0f;
 
-        while (timer < duration)
+        for (int i = 0; i < attackCount; i++)
         {
             foreach (var firePosition in _firePositions)
             {
@@ -104,8 +97,12 @@ public class Boss : MonoBehaviour
                 timer += Time.deltaTime;
                 yield return new WaitForSeconds(term);
             }
-            
         }
+    }
+
+    public void NotifyPatternEnd()
+    {
+        OnPatternEnd?.Invoke();
     }
 
 }

@@ -8,8 +8,8 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private float _maxHealth = 150;
 
     [Header("이펙트")]
+    [SerializeField] private ParticleSystem _damageEffect;
     [SerializeField] private ParticleSystem _deathEffect;
-    [SerializeField] private ParticleSystem _damagedEffect;
 
     [Header("점수")]
     [SerializeField] private int _score;
@@ -41,8 +41,8 @@ public class HealthComponent : MonoBehaviour
     private void Init()
     {
         _isDead = false;
-        _currentHealth = _maxHealth;
         _spriteRenderer.color = _originalColor;
+        _currentHealth = _maxHealth;
     }
 
     public void TakeDamage(float damage)
@@ -53,12 +53,20 @@ public class HealthComponent : MonoBehaviour
         {
             if (_isDead) return;
             _isDead = true;
+
             PlayDeathEffect();
             Die();
+            
             return;
         }
-        PlayDamagedEffect();
+        PlayDamageEffect();
         StartCoroutine(FlashHitColor());
+    }
+
+    private void PlayDamageEffect()
+    {
+        if (_damageEffect == null) return;
+        Instantiate(_damageEffect, transform.position, Quaternion.identity);
     }
 
     private void PlayDeathEffect()
@@ -67,21 +75,17 @@ public class HealthComponent : MonoBehaviour
         Instantiate(_deathEffect, transform.position, Quaternion.identity);
     }
 
-    private void PlayDamagedEffect()
-    {
-        if (_damagedEffect == null) return;
-        Instantiate(_deathEffect, transform.position, Quaternion.identity);
-    }
-
     private void Die()
     {
         SoundManager.Instance.PlaySFX(SoundManager.Sfx.ENEMYEXPLOSION);
         ScoreManager.Instance.AddScore(_score);
-
-        _itemDrop.TryDropItem(transform.position);
         _cameraShake.Play();
 
-        gameObject.SetActive(false);
+        if (GetComponent<Boss>() == null)
+        {
+            _itemDrop.TryDropItem(transform.position);
+            gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator FlashHitColor()

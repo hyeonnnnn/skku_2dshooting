@@ -2,16 +2,25 @@ using UnityEngine;
 
 public class BossEnemySpawner : MonoBehaviour
 {
+    [Header("보스")]
     [SerializeField] private GameObject _bossEnemyObject;
 
-    private int _spawnScore = 25000;
+    [Header("이펙트")]
+    [SerializeField] private ParticleSystem _appearEffect;
+    [SerializeField] private ParticleSystem _disappearEffect;
+
+    private int _spawnScore = 20000;
     private int _nextSpawnScore;
 
     private void Awake()
     {
+        Init();
+    }
+
+    private void Init()
+    {
         _nextSpawnScore = _spawnScore;
         _bossEnemyObject.SetActive(false);
-
     }
 
     private void Update()
@@ -33,10 +42,15 @@ public class BossEnemySpawner : MonoBehaviour
     private void SpawnBossEnemy()
     {
         _bossEnemyObject.SetActive(true);
+        Instantiate(_appearEffect, transform.position, Quaternion.identity);
+
+        Boss boss = _bossEnemyObject.GetComponent<Boss>();
+        boss.OnPatternEnd += DespawnBossEnemy;
     }
 
-    public void EndBossEnemy()
+    public void DespawnBossEnemy()
     {
         _bossEnemyObject.SetActive(false);
+        Instantiate(_disappearEffect, transform.position, Quaternion.identity);
     }
 }

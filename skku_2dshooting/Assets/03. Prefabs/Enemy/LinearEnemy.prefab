@@ -128,7 +128,7 @@ MonoBehaviour:
   _maxHealth: 150
   _deathEffect: {fileID: 3663718601813231946, guid: 5c6e8adb300cc1a4a92eae084e76742c, type: 3}
   _damagedEffect: {fileID: 3127466023773811244, guid: cd61ddd3bc509e34fab42183e96b6619, type: 3}
-  _score: 500
+  _score: 250
   _hitFlashDuration: 0.1
   _hitFlashColor: {r: 0.8773585, g: 0.48006406, b: 0.48006406, a: 1}
 --- !u!114 &1504144653667913927
@@ -144,7 +144,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 1
-  _damageEffect: {fileID: 5880797563141009103, guid: c1afe5d6b71f1954cbbe87ff7f030255, type: 3}
 --- !u!114 &9210767878868234231
 MonoBehaviour:
   m_ObjectHideFlags: 0
