@@ -8,6 +8,7 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private float _maxHealth = 150;
 
     [Header("이펙트")]
+    [SerializeField] private ParticleSystem _damageEffect;
     [SerializeField] private ParticleSystem _deathEffect;
 
     [Header("점수")]
@@ -22,6 +23,7 @@ public class HealthComponent : MonoBehaviour
     private bool _isDead = false;
     private ItemDrop _itemDrop;
     private CameraShake _cameraShake;
+    private Boss _boss;
 
 
     private void Awake()
@@ -30,6 +32,7 @@ public class HealthComponent : MonoBehaviour
         _cameraShake  = Camera.main.GetComponent<CameraShake>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _originalColor = _spriteRenderer.color;
+        _boss = GetComponent<Boss>();
     }
 
     private void OnEnable()
@@ -40,8 +43,8 @@ public class HealthComponent : MonoBehaviour
     private void Init()
     {
         _isDead = false;
-        _currentHealth = _maxHealth;
         _spriteRenderer.color = _originalColor;
+        _currentHealth = _maxHealth;
     }
 
     public void TakeDamage(float damage)
@@ -55,9 +58,17 @@ public class HealthComponent : MonoBehaviour
 
             PlayDeathEffect();
             Die();
+            
             return;
         }
+        PlayDamageEffect();
         StartCoroutine(FlashHitColor());
+    }
+
+    private void PlayDamageEffect()
+    {
+        if (_damageEffect == null) return;
+        Instantiate(_damageEffect, transform.position, Quaternion.identity);
     }
 
     private void PlayDeathEffect()
@@ -70,11 +81,13 @@ public class HealthComponent : MonoBehaviour
     {
         SoundManager.Instance.PlaySFX(SoundManager.Sfx.ENEMYEXPLOSION);
         ScoreManager.Instance.AddScore(_score);
-
-        _itemDrop.TryDropItem(transform.position);
         _cameraShake.Play();
 
-        gameObject.SetActive(false);
+        if (_boss == null)
+        {
+            _itemDrop.TryDropItem(transform.position);
+            gameObject.SetActive(false);
+        }
     }
 
     private IEnumerator FlashHitColor()

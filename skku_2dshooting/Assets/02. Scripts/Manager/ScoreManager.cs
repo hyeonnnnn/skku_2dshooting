@@ -17,6 +17,9 @@ public class ScoreManager : MonoBehaviour
     private float _textEffectScale = 1.5f;
     private float _textEffectDuration = 0.2f;
     private float _textEffectReturnDuration = 0.5f;
+
+    public event System.Action OnScoreReached;
+
     public int CurrentScore => _currentScore;
 
     private void Awake()
@@ -39,7 +42,8 @@ public class ScoreManager : MonoBehaviour
         if (score <= 0) return;
 
         _currentScore += score;
-
+        
+        NotifyScoreReached();
         UpdateCurrentScoreUI();
         UpdateBestScore();
     }
@@ -102,5 +106,10 @@ public class ScoreManager : MonoBehaviour
         {
             text.transform.DOScale(1f, _textEffectReturnDuration);
         });
+    }
+
+    public void NotifyScoreReached()
+    {
+        OnScoreReached?.Invoke();
     }
 }

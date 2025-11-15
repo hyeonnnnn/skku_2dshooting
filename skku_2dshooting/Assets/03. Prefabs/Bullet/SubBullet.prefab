@@ -105,7 +105,7 @@ MonoBehaviour:
   _startSpeed: 0.03
   _endSpeed: 0.04
   _duration: 0.5
-  Damage: 35
+  _damage: 30
 --- !u!58 &-2979252147677729339
 CircleCollider2D:
   m_ObjectHideFlags: 0

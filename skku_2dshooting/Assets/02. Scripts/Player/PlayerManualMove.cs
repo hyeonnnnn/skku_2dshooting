@@ -6,6 +6,9 @@ public class PlayerManualMove : MonoBehaviour
     private Vector2 _originPosition;
     private Animator _animator;
 
+    [Header("조이스틱")]
+    [SerializeField] private Joystick _joystick;
+
     private void Awake()
     {
         _playerStatus = GetComponent<PlayerStatus>();
@@ -27,8 +30,8 @@ public class PlayerManualMove : MonoBehaviour
             return;
         }
 
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
+        float h = _joystick.Horizontal;
+        float v = _joystick.Vertical;
         Vector2 direction = new Vector2(h, v).normalized;
 
         _animator.SetInteger("x", direction.x > 0 ? 1 : direction.x < 0 ? -1 : 0);

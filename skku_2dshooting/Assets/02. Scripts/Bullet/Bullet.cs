@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     private float _acceleration;
 
     [Header("스탯")]
-    public float Damage;
+    [SerializeField] private float _damage;
 
     private TrailRenderer _trailRenderer;
 
@@ -29,7 +29,6 @@ public class Bullet : MonoBehaviour
         _currentSpeed = _startSpeed;
         _acceleration = (_endSpeed - _startSpeed) / _duration;
         _trailRenderer.Clear();
-
     }
 
     private void Update()
@@ -56,7 +55,7 @@ public class Bullet : MonoBehaviour
     {
         BodyPart bodyPart = collision.GetComponent<BodyPart>();
         if (bodyPart == null) return;
-        bodyPart.Hit(Damage);
+        bodyPart.Hit(_damage);
 
         gameObject.SetActive(false);
     }

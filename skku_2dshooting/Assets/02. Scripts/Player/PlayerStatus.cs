@@ -23,6 +23,9 @@ public class PlayerStatus : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private Color _originalColor;
 
+    [Header("데미지 이펙트")]
+    [SerializeField] private ParticleSystem _damageEffect;
+
     private void Awake()
     {
         _currentHealth = _maxHealth;
@@ -41,6 +44,7 @@ public class PlayerStatus : MonoBehaviour
     {
         _currentHealth -= damage;
         StartCoroutine(FlashHitColor());
+        Instantiate(_damageEffect, transform.position, Quaternion.identity);
         if (_currentHealth <= 0)
         {
             Die();
