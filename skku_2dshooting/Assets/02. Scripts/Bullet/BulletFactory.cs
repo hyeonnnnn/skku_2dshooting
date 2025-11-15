@@ -19,7 +19,7 @@ public class BulletFactory : MonoBehaviour
     private GameObject[] _subBulletObjectPool;
     private GameObject[] _followerBulletObjectPool;
 
-    [SerializeField] private int _bossPoolSize = 300;
+    [SerializeField] private int _bossPoolSize = 100;
     private GameObject[] _bossBulletObjectPool;
 
     private void Awake()

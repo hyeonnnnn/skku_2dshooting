@@ -29,7 +29,6 @@ public class Bullet : MonoBehaviour
         _currentSpeed = _startSpeed;
         _acceleration = (_endSpeed - _startSpeed) / _duration;
         _trailRenderer.Clear();
-
     }
 
     private void Update()

@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.UI.Image;
 
 public class Boss : MonoBehaviour
 {
@@ -69,6 +71,7 @@ public class Boss : MonoBehaviour
         while (timer < duration)
         {
             transform.position = Vector3.MoveTowards( transform.position, _targetPosition, speed * Time.deltaTime );
+            
             timer += Time.deltaTime;
             yield return null;
         }
@@ -77,6 +80,7 @@ public class Boss : MonoBehaviour
         while (timer < duration)
         {
             transform.position = Vector3.MoveTowards( transform.position, _originPosition, speed * Time.deltaTime);
+
             timer += Time.deltaTime;
             yield return null;
         }

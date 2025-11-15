@@ -12,6 +12,13 @@ public class EnemyBullet : MonoBehaviour
     [Header("스탯")]
     [SerializeField] private float _damage;
 
+    private TrailRenderer _trailRenderer;
+
+    private void Awake()
+    {
+        _trailRenderer = GetComponent<TrailRenderer>();
+    }
+
     private void OnEnable()
     {
         Init();
@@ -21,7 +28,7 @@ public class EnemyBullet : MonoBehaviour
     {
         _currentSpeed = _startSpeed;
         _acceleration = (_endSpeed - _startSpeed) / _duration;
-
+        _trailRenderer.Clear();
     }
 
     private void Update()
