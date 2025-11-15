@@ -11,20 +11,18 @@ public class BossPatternController
     {
         _boss = boss;
 
-        Debug.Log("패턴 추가하기");
         _patterns.Add(new NormalAttackPattern(_boss));
         _patterns.Add(new RushAttackPattern(_boss));
+        _patterns.Add(new CircleAttackPattern(_boss));
     }
 
     public IEnumerator StartPattern()
     {
-        Debug.Log("패턴 시작하기");
         while (true)
         {
             foreach (var pattern in _patterns)
             {
-                Debug.Log($"{pattern}을 실행");
-                yield return _boss.StartCoroutine(pattern.Execute(_boss));
+                yield return _boss.StartCoroutine(pattern.Execute());
             }
         }
     }

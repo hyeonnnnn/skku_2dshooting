@@ -5,9 +5,10 @@ public class NormalAttackPattern : BossPatternBase
 {
     public NormalAttackPattern(Boss boss) : base(boss) { }
 
-    public override IEnumerator Execute(Boss _boss)
+    public override IEnumerator Execute()
     {
         Debug.Log("일반 공격 패턴 시작");
+       
         //float timer = 0f;
         //float coolTime = 1.5f;
         //int attackCount = 5;
@@ -26,6 +27,7 @@ public class NormalAttackPattern : BossPatternBase
         //        yield return null;
         //    }
         //}
-        yield return new WaitForSeconds(1f);
+
+        yield return new WaitForSeconds(_waitTime);
     }
 }
